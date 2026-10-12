@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Student Project Tracker</title>
 
     <link rel="stylesheet" href="style.css">
@@ -22,8 +23,13 @@
             <form id="project-form">
                 <div>
                     <label for="name">Project Name:</label>
-                    <input type="text" id="name" name="name"
-                           required maxlength="80">
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        maxlength="80"
+                    >
                 </div>
 
                 <div>
@@ -35,8 +41,13 @@
                     </select>
                 </div>
 
-                <button id="save-button" type="submit">Add Project</button>
-                <button id="cancel-button" type="button" hidden>Cancel</button>
+                <button id="save-button" type="submit">
+                    Add Project
+                </button>
+
+                <button id="cancel-button" type="button" hidden>
+                    Cancel
+                </button>
             </form>
 
             <p id="message" role="status" aria-live="polite"></p>
@@ -44,7 +55,9 @@
 
         <section aria-labelledby="list-title">
             <h2 id="list-title">Project List</h2>
+
             <p id="empty-state">No projects added yet.</p>
+
             <ul id="project-list"></ul>
         </section>
     </main>
