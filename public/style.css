@@ -1,1 +1,134 @@
+/* Basic page styling */
+* {
+    box-sizing: border-box;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f7ff;
+    color: #243447;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #1565c0;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+/* Main content */
+main {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Sections */
+section {
+    background-color: white;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    color: #1565c0;
+    margin-top: 0;
+}
+
+/* Form controls */
+form div {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #b7c9dc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid #64b5f6;
+    border-color: #1565c0;
+}
+
+/* Buttons */
+button {
+    background-color: #1565c0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+button:hover {
+    background-color: #0d47a1;
+}
+
+button:focus-visible {
+    outline: 3px solid #64b5f6;
+    outline-offset: 3px;
+}
+
+/* Project list */
+#project-list {
+    padding-left: 22px;
+}
+
+#project-list li {
+    background-color: #f0f7ff;
+    border-left: 4px solid #1565c0;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+}
+
+/* Feedback message */
+#message {
+    color: #176b3a;
+    font-weight: bold;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    main {
+        margin: 15px auto;
+        padding: 0 12px;
+    }
+
+    section {
+        padding: 18px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+}
