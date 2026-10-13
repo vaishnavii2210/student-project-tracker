@@ -1,134 +1,349 @@
-/* Basic page styling */
-* {
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f7ff;
-    color: #243447;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-}
+    <title>Student Project Tracker</title>
 
-/* Header */
-header {
-    background-color: #1565c0;
-    color: white;
-    text-align: center;
-    padding: 25px 15px;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-header h1 {
-    margin: 0;
-    font-size: 2rem;
-}
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: #ffffff;
+            background: linear-gradient(135deg, #001f3f, #0077b6, #48cae4);
+            padding: 25px;
+        }
 
-header p {
-    margin-bottom: 0;
-}
+        header {
+            text-align: center;
+            padding: 30px 15px;
+        }
 
-/* Main content */
-main {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
 
-/* Sections */
-section {
-    background-color: white;
-    margin-bottom: 25px;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
+        header p {
+            font-size: 16px;
+            color: #e0f7ff;
+        }
 
-h2 {
-    color: #1565c0;
-    margin-top: 0;
-}
+        main {
+            max-width: 1000px;
+            margin: auto;
+        }
 
-/* Form controls */
-form div {
-    margin-bottom: 18px;
-}
+        .panel {
+            background: rgba(0, 35, 75, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
 
-label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
+        h2 {
+            margin-bottom: 20px;
+        }
 
-input,
-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #b7c9dc;
-    border-radius: 6px;
-    font-size: 1rem;
-}
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
 
-input:focus,
-select:focus {
-    outline: 2px solid #64b5f6;
-    border-color: #1565c0;
-}
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-/* Buttons */
-button {
-    background-color: #1565c0;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 11px 18px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-right: 8px;
-}
+        .full-width {
+            grid-column: 1 / -1;
+        }
 
-button:hover {
-    background-color: #0d47a1;
-}
+        label {
+            font-weight: bold;
+        }
 
-button:focus-visible {
-    outline: 3px solid #64b5f6;
-    outline-offset: 3px;
-}
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b9eaff;
+            border-radius: 9px;
+            background: #ffffff;
+            color: #12304a;
+            font-size: 15px;
+        }
 
-/* Project list */
-#project-list {
-    padding-left: 22px;
-}
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
 
-#project-list li {
-    background-color: #f0f7ff;
-    border-left: 4px solid #1565c0;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    overflow-wrap: anywhere;
-}
+        button {
+            border: none;
+            border-radius: 9px;
+            padding: 12px 18px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
 
-/* Feedback message */
-#message {
-    color: #176b3a;
-    font-weight: bold;
-}
+        button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
 
-/* Mobile layout */
-@media (max-width: 600px) {
-    main {
-        margin: 15px auto;
-        padding: 0 12px;
-    }
+        .primary-button {
+            background: #48cae4;
+            color: #002b45;
+        }
 
-    section {
-        padding: 18px;
-    }
+        .secondary-button {
+            background: #caf0f8;
+            color: #003049;
+        }
 
-    header h1 {
-        font-size: 1.6rem;
-    }
-}
+        .danger-button {
+            background: #ffb4a2;
+            color: #641b1b;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 28px;
+            margin-top: 8px;
+        }
+
+        #projectList {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .project-card {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .project-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .project-card p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 25px;
+            color: #e0f7ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #e0f7ff;
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 12px;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            .form-grid,
+            #projectList,
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🌊 Student Project Tracker 🐬</h1>
+        <p>Organize your ideas, track your progress, and achieve your goals!</p>
+    </header>
+
+    <main>
+        <section class="stats">
+            <div class="stat-card">
+                Total Projects
+                <strong id="totalCount">0</strong>
+            </div>
+
+            <div class="stat-card">
+                In Progress
+                <strong id="progressCount">0</strong>
+            </div>
+
+            <div class="stat-card">
+                Completed
+                <strong id="completedCount">0</strong>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2 id="formHeading">➕ Add New Project</h2>
+
+            <form id="projectForm">
+                <input type="hidden" id="editId">
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="projectName">Project Name *</label>
+                        <input
+                            type="text"
+                            id="projectName"
+                            placeholder="Enter project name"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="category">Category *</label>
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="IoT">IoT</option>
+                            <option value="Robotics">Robotics</option>
+                            <option value="Research">Research</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="Planned">Planned</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="targetDate">Target Date</label>
+                        <input type="date" id="targetDate">
+                    </div>
+
+                    <div class="field full-width">
+                        <label for="description">Description</label>
+                        <textarea
+                            id="description"
+                            placeholder="Describe your project..."
+                        ></textarea>
+                    </div>
+
+                    <div class="field full-width">
+                        <button type="submit" class="primary-button" id="submitButton">
+                            Add Project
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="cancelButton"
+                            hidden
+                            style="margin-top: 10px;"
+                        >
+                            Cancel Edit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>📋 My Projects</h2>
+
+            <div class="filters">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="🔍 Search projects..."
+                >
+
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="IoT">IoT</option>
+                    <option value="Robotics">Robotics</option>
+                    <option value="Research">Research</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <select id="statusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="Planned">Planned</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+            <div id="projectList">
+                <p class="empty-message">Loading projects...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>🌊 Student Project Tracker | Learn, Build, Achieve! 🐠</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

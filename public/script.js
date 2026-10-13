@@ -1,10 +1,37 @@
-
-const projectForm = document.getElementById("project-form");
-const nameInput = document.getElementById("name");
+const projectForm = document.getElementById("projectForm");
+const nameInput = document.getElementById("projectName");
 const statusInput = document.getElementById("status");
-const projectList = document.getElementById("project-list");
-const emptyState = document.getElementById("empty-state");
-const message = document.getElementById("message");
+const projectList = document.getElementById("projectList");
+
+const projects = [];
+
+function renderProjects() {
+    projectList.innerHTML = "";
+
+    if (projects.length === 0) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.className = "empty-message";
+        emptyMessage.textContent = "No projects added yet.";
+        projectList.appendChild(emptyMessage);
+        return;
+    }
+
+    projects.forEach(function (project) {
+        const listItem = document.createElement("article");
+        listItem.className = "project-card";
+
+        const projectTitle = document.createElement("h3");
+        projectTitle.textContent = project.name;
+
+        const projectStatus = document.createElement("p");
+        projectStatus.textContent = "Status: " + project.status;
+
+        listItem.appendChild(projectTitle);
+        listItem.appendChild(projectStatus);
+
+        projectList.appendChild(listItem);
+    });
+}
 
 projectForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -13,23 +40,21 @@ projectForm.addEventListener("submit", function (event) {
     const projectStatus = statusInput.value;
 
     if (projectName === "") {
-        message.textContent = "Please enter a project name.";
+        alert("Please enter a project name.");
         return;
     }
 
-    const listItem = document.createElement("li");
-    const projectTitle = document.createElement("strong");
-    const projectDetails = document.createElement("span");
+    const project = {
+        id: crypto.randomUUID(),
+        name: projectName,
+        status: projectStatus
+    };
 
-    projectTitle.textContent = projectName;
-    projectDetails.textContent = " — " + projectStatus;
+    projects.push(project);
 
-    listItem.appendChild(projectTitle);
-    listItem.appendChild(projectDetails);
-    projectList.appendChild(listItem);
-
-    emptyState.hidden = true;
-    message.textContent = "Project added successfully!";
+    renderProjects();
 
     projectForm.reset();
 });
+
+renderProjects();

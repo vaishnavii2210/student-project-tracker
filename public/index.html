@@ -1,65 +1,1230 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Student Project Tracker</title>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <style>
+        :root {
+            --deep-blue: #021b38;
+            --ocean-blue: #075985;
+            --aqua: #67e8f9;
+            --mint: #a7f3d0;
+            --white: #ffffff;
+            --dark-text: #16364a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(103, 232, 249, 0.22),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(167, 243, 208, 0.15),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #021b38,
+                    #064e75,
+                    #087e8b
+                );
+
+            overflow-x: hidden;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* Animated underwater background */
+
+        .ocean-background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -80px;
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            animation: floatUp 12s linear infinite;
+        }
+
+        .bubble:nth-child(2) {
+            left: 12%;
+            width: 12px;
+            height: 12px;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            left: 28%;
+            width: 25px;
+            height: 25px;
+            animation-duration: 15s;
+        }
+
+        .bubble:nth-child(4) {
+            left: 47%;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(5) {
+            left: 65%;
+            width: 14px;
+            height: 14px;
+            animation-duration: 10s;
+        }
+
+        .bubble:nth-child(6) {
+            left: 82%;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(7) {
+            left: 94%;
+            width: 24px;
+            height: 24px;
+            animation-duration: 14s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-120vh) translateX(30px);
+                opacity: 0;
+            }
+        }
+
+        /* Floating sea creatures */
+
+        .sea-creature {
+            position: fixed;
+            z-index: 1;
+            font-size: 40px;
+            pointer-events: none;
+            animation: swim 5s ease-in-out infinite;
+        }
+
+        .turtle {
+            top: 120px;
+            left: 2%;
+        }
+
+        .jellyfish {
+            top: 200px;
+            right: 3%;
+            animation-delay: 1s;
+        }
+
+        .fish {
+            bottom: 100px;
+            left: 3%;
+            animation-delay: 2s;
+        }
+
+        .octopus {
+            bottom: 65px;
+            right: 3%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes swim {
+            0%, 100% {
+                transform: translateY(0) rotate(-4deg);
+            }
+
+            50% {
+                transform: translateY(-16px) rotate(4deg);
+            }
+        }
+
+        /* Main page */
+
+        .container {
+            width: min(1080px, 92%);
+            margin: auto;
+            padding: 35px 0 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #a5f3fc;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: clamp(32px, 5vw, 50px);
+            font-weight: 850;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            max-width: 600px;
+            margin: 12px auto;
+            color: #e0faff;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .decorations {
+            margin-top: 15px;
+            font-size: 25px;
+            letter-spacing: 8px;
+        }
+
+        /* Statistics */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            padding: 20px 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.23);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-icon {
+            font-size: 26px;
+        }
+
+        .stat-number {
+            margin: 5px 0;
+            color: #ffffff;
+            font-size: 30px;
+            font-weight: 850;
+        }
+
+        .stat-label {
+            color: #e0faff;
+            font-size: 13px;
+        }
+
+        /* Content panels */
+
+        .panel {
+            padding: 27px;
+            margin-bottom: 23px;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 23px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 23px;
+        }
+
+        .section-icon {
+            display: grid;
+            place-items: center;
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(103, 232, 249, 0.35);
+            border-radius: 14px;
+            background: rgba(103, 232, 249, 0.16);
+            font-size: 24px;
+        }
+
+        .section-heading h2 {
+            color: #ffffff;
+            font-size: 21px;
+        }
+
+        .section-heading p {
+            margin-top: 4px;
+            color: #e0faff;
+            font-size: 13px;
+        }
+
+        /* Form */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 750;
+        }
+
+        input,
+        select {
+            width: 100%;
+            min-height: 46px;
+            padding: 12px 14px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            outline: none;
+            color: #16364a;
+            background: #ffffff;
+        }
+
+        input::placeholder {
+            color: #64748b;
+            opacity: 1;
+        }
+
+        select option {
+            color: #16364a;
+            background: #ffffff;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #67e8f9;
+            box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.2);
+        }
+
+        /* Buttons */
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .btn {
+            padding: 12px 19px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            color: #063047;
+            background: linear-gradient(135deg, #a7f3d0, #67e8f9);
+            box-shadow: 0 5px 17px rgba(103, 232, 249, 0.18);
+        }
+
+        .btn-secondary {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-edit {
+            padding: 9px 12px;
+            color: #063047;
+            background: #b5f4ff;
+            font-size: 12px;
+        }
+
+        .btn-delete {
+            padding: 9px 12px;
+            color: #ffffff;
+            background: #c83e57;
+            font-size: 12px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Search and filters */
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Project cards */
+
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .project-card {
+            padding: 21px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 18px;
+            color: #16364a;
+            background: #ffffff;
+            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.1);
+            animation: cardAppear 0.3s ease;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card h3 {
+            margin-bottom: 11px;
+            color: #075985;
+            font-size: 19px;
+            overflow-wrap: anywhere;
+        }
+
+        .project-description {
+            margin-bottom: 14px;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .status-not-started {
+            color: #334155;
+            background: #e2e8f0;
+        }
+
+        .status-in-progress {
+            color: #854d0e;
+            background: #fef3c7;
+        }
+
+        .status-completed {
+            color: #166534;
+            background: #dcfce7;
+        }
+
+        .category-badge {
+            color: #075985;
+            background: #cffafe;
+        }
+
+        .project-footer {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-top: 13px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .project-date {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Empty messages */
+
+        .empty-state {
+            padding: 40px 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 17px;
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .empty-icon {
+            margin-bottom: 12px;
+            font-size: 46px;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .empty-state p {
+            color: #e0faff;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 15px 0;
+            color: #e0faff;
+            font-size: 13px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        footer .footer-icons {
+            margin-bottom: 8px;
+            font-size: 23px;
+        }
+
+        /* Mobile-friendly layout */
+
+        @media (max-width: 700px) {
+            .container {
+                width: 94%;
+                padding-top: 25px;
+            }
+
+            .stats {
+                gap: 8px;
+            }
+
+            .stat-card {
+                padding: 15px 5px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+
+            .panel {
+                padding: 19px;
+            }
+
+            .form-grid,
+            .project-list {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
+
+            .sea-creature {
+                font-size: 29px;
+                opacity: 0.55;
+            }
+
+            .section-heading h2 {
+                font-size: 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>Student Project Tracker</h1>
-        <p>Track our electronics project ideas.</p>
-    </header>
 
-    <main>
-        <section aria-labelledby="form-title">
-            <h2 id="form-title">Add a Project</h2>
+    <!-- Ocean background -->
+    <div class="ocean-background" aria-hidden="true">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
 
-            <form id="project-form">
+    <!-- Sea creatures -->
+    <div class="sea-creature turtle" aria-hidden="true">🐢</div>
+    <div class="sea-creature jellyfish" aria-hidden="true">🪼</div>
+    <div class="sea-creature fish" aria-hidden="true">🐠</div>
+    <div class="sea-creature octopus" aria-hidden="true">🐙</div>
+
+    <main class="container">
+
+        <!-- Page header -->
+        <header>
+            <div class="eyebrow">🎓 ORGANIZE • LEARN • ACHIEVE</div>
+
+            <h1>Student Project Tracker</h1>
+
+            <p class="subtitle">
+                Track your ideas, organize your projects, and celebrate
+                every achievement. Your learning journey starts here!
+            </p>
+
+            <div class="decorations" aria-hidden="true">
+                🐚 🪸 🫧
+            </div>
+        </header>
+
+        <!-- Project statistics -->
+        <section class="stats" aria-label="Project statistics">
+
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⚙️</div>
+                <div class="stat-number" id="progressCount">0</div>
+                <div class="stat-label">In Progress</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-number" id="completedCount">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+
+        </section>
+
+        <!-- Add or edit project -->
+        <section class="panel">
+
+            <div class="section-heading">
+                <div class="section-icon">📝</div>
+
                 <div>
-                    <label for="name">Project Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        maxlength="80"
+                    <h2 id="formTitle">Add a Project</h2>
+                    <p>Enter your project details below.</p>
+                </div>
+            </div>
+
+            <form id="projectForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="projectName">Project Name *</label>
+
+                        <input
+                            type="text"
+                            id="projectName"
+                            placeholder="e.g. IoT Monitor"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectCategory">Category *</label>
+
+                        <select id="projectCategory" required>
+                            <option value="">Choose a category</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="IoT">IoT</option>
+                            <option value="Robotics">Robotics</option>
+                            <option value="Research">Research</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectStatus">Project Status *</label>
+
+                        <select id="projectStatus" required>
+                            <option value="Planned">Planned</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDate">Target Date</label>
+
+                        <input type="date" id="projectDate">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="projectDescription">Description</label>
+
+                        <input
+                            type="text"
+                            id="projectDescription"
+                            placeholder="What is your project about?"
+                            maxlength="250"
+                        >
+                    </div>
+
+                </div>
+
+                <div class="button-row">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="submitButton"
                     >
+                        ➕ Add Project
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary hidden"
+                        id="cancelEditButton"
+                    >
+                        ✖ Cancel Edit
+                    </button>
+
                 </div>
+
+            </form>
+        </section>
+
+        <!-- Project list -->
+        <section class="panel">
+
+            <div class="section-heading">
+                <div class="section-icon">📂</div>
 
                 <div>
-                    <label for="status">Project Status:</label>
-                    <select id="status" name="status">
-                        <option value="Planned">Planned</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                    </select>
+                    <h2>Your Project List</h2>
+                    <p>View, search, update, and organize your work.</p>
                 </div>
+            </div>
 
-                <button id="save-button" type="submit">
-                    Add Project
-                </button>
+            <!-- Search and filters -->
+            <div class="toolbar">
 
-                <button id="cancel-button" type="button" hidden>
-                    Cancel
-                </button>
-            </form>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="🔎 Search projects..."
+                    aria-label="Search projects"
+                >
 
-            <p id="message" role="status" aria-live="polite"></p>
+                <select id="statusFilter" aria-label="Filter by status">
+                    <option value="All">All Statuses</option>
+                    <option value="Planned">Planned</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+                <select id="categoryFilter" aria-label="Filter by category">
+                    <option value="All">All Categories</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="IoT">IoT</option>
+                    <option value="Robotics">Robotics</option>
+                    <option value="Research">Research</option>
+                    <option value="Other">Other</option>
+                </select>
+
+            </div>
+
+            <div id="projectList" class="project-list"></div>
+
+            <div id="emptyState" class="empty-state">
+                <div class="empty-icon">📘</div>
+                <h3>No projects yet!</h3>
+                <p>Add your first project using the form above.</p>
+            </div>
+
+            <div id="noResults" class="empty-state hidden">
+                <div class="empty-icon">🔍</div>
+                <h3>No projects found</h3>
+                <p>Try another search term or change your filters.</p>
+            </div>
+
         </section>
 
-        <section aria-labelledby="list-title">
-            <h2 id="list-title">Project List</h2>
+        <footer>
+            <div class="footer-icons" aria-hidden="true">
+                📚 💻 ⚙️ 🎓
+            </div>
 
-            <p id="empty-state">No projects added yet.</p>
+            Made for curious minds and creative students.
 
-            <ul id="project-list"></ul>
-        </section>
+            <br>
+
+            Learn something new every day! ✨
+        </footer>
+
     </main>
+
+    <script>
+        "use strict";
+
+        /* Get HTML elements */
+
+        const projectForm = document.getElementById("projectForm");
+
+        const projectName = document.getElementById("projectName");
+        const projectCategory = document.getElementById("projectCategory");
+        const projectStatus = document.getElementById("projectStatus");
+        const projectDate = document.getElementById("projectDate");
+        const projectDescription = document.getElementById("projectDescription");
+
+        const projectList = document.getElementById("projectList");
+        const emptyState = document.getElementById("emptyState");
+        const noResults = document.getElementById("noResults");
+
+        const searchInput = document.getElementById("searchInput");
+        const statusFilter = document.getElementById("statusFilter");
+        const categoryFilter = document.getElementById("categoryFilter");
+
+        const totalCount = document.getElementById("totalCount");
+        const progressCount = document.getElementById("progressCount");
+        const completedCount = document.getElementById("completedCount");
+
+        const formTitle = document.getElementById("formTitle");
+        const submitButton = document.getElementById("submitButton");
+        const cancelEditButton = document.getElementById("cancelEditButton");
+
+        const STORAGE_KEY = "studentTrackerProjects";
+
+        let projects = [];
+        let editingProjectId = null;
+
+        /* Load projects saved in this browser */
+
+        function loadProjects() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+
+                    if (Array.isArray(parsed)) {
+                        projects = parsed.map(project => ({
+                            ...project,
+                            category: project.category || "Other",
+                            status: project.status || "Planned",
+                            description: project.description || "",
+                            date: project.date || ""
+                        }));
+                    }
+                }
+            } catch (error) {
+                console.error("Unable to load projects:", error);
+                projects = [];
+            }
+
+            renderProjects();
+        }
+
+        /* Save projects */
+
+        function saveProjects() {
+            try {
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(projects)
+                );
+            } catch (error) {
+                console.error("Unable to save projects:", error);
+
+                alert("Unable to save projects in this browser.");
+            }
+        }
+
+        /* Generate a unique project ID */
+
+        function createProjectId() {
+            if (
+                window.crypto &&
+                typeof window.crypto.randomUUID === "function"
+            ) {
+                return window.crypto.randomUUID();
+            }
+
+            return Date.now().toString(36) +
+                Math.random().toString(36).slice(2);
+        }
+
+        /* Add or update a project */
+
+        projectForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = projectName.value.trim();
+
+            if (!name) {
+                alert("Please enter a project name.");
+                projectName.focus();
+                return;
+            }
+
+            const projectData = {
+                name: name,
+                category: projectCategory.value,
+                status: projectStatus.value,
+                date: projectDate.value,
+                description: projectDescription.value.trim()
+            };
+
+            if (editingProjectId !== null) {
+                const index = projects.findIndex(
+                    project => project.id === editingProjectId
+                );
+
+                if (index !== -1) {
+                    projects[index] = {
+                        ...projects[index],
+                        ...projectData
+                    };
+                }
+            } else {
+                projects.unshift({
+                    id: createProjectId(),
+                    ...projectData,
+                    createdAt: new Date().toISOString()
+                });
+            }
+
+            saveProjects();
+            resetForm();
+            renderProjects();
+        });
+
+        /* Reset form */
+
+        function resetForm() {
+            projectForm.reset();
+
+            editingProjectId = null;
+
+            formTitle.textContent = "Add a Project";
+            submitButton.textContent = "➕ Add Project";
+
+            cancelEditButton.classList.add("hidden");
+        }
+
+        cancelEditButton.addEventListener("click", resetForm);
+
+        /* Protect text before adding it to HTML */
+
+        function escapeHTML(value) {
+            return String(value ?? "").replace(
+                /[&<>"']/g,
+                character => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                })[character]
+            );
+        }
+
+        /* Edit project */
+
+        function editProject(id) {
+            const project = projects.find(item => item.id === id);
+
+            if (!project) {
+                return;
+            }
+
+            editingProjectId = id;
+
+            projectName.value = project.name;
+            projectCategory.value = project.category || "Other";
+            projectStatus.value = project.status || "Planned";
+            projectDate.value = project.date || "";
+            projectDescription.value = project.description || "";
+
+            formTitle.textContent = "Edit Project";
+            submitButton.textContent = "💾 Save Changes";
+
+            cancelEditButton.classList.remove("hidden");
+
+            projectForm.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+            projectName.focus();
+        }
+
+        /* Delete project */
+
+        function deleteProject(id) {
+            const project = projects.find(item => item.id === id);
+
+            if (!project) {
+                return;
+            }
+
+            const confirmed = confirm(
+                'Are you sure you want to delete "' +
+                project.name +
+                '"?'
+            );
+
+            if (!confirmed) {
+                return;
+            }
+
+            projects = projects.filter(item => item.id !== id);
+
+            if (editingProjectId === id) {
+                resetForm();
+            }
+
+            saveProjects();
+            renderProjects();
+        }
+
+        /* Format date */
+
+        function formatDate(value) {
+            if (!value) {
+                return "No target date";
+            }
+
+            const parts = value.split("-");
+
+            if (parts.length !== 3) {
+                return "No target date";
+            }
+
+            return parts[2] + "/" + parts[1] + "/" + parts[0];
+        }
+
+        /* Update statistics */
+
+        function updateStatistics() {
+            totalCount.textContent = projects.length;
+
+            progressCount.textContent = projects.filter(
+                project => project.status === "In Progress"
+            ).length;
+
+            completedCount.textContent = projects.filter(
+                project => project.status === "Completed"
+            ).length;
+        }
+
+        /* Search and filter projects */
+
+        function getFilteredProjects() {
+            const term = searchInput.value.trim().toLowerCase();
+
+            const selectedStatus = statusFilter.value;
+            const selectedCategory = categoryFilter.value;
+
+            return projects.filter(project => {
+                const searchableText = [
+                    project.name,
+                    project.category,
+                    project.status,
+                    project.description
+                ].join(" ").toLowerCase();
+
+                const matchesSearch = searchableText.includes(term);
+
+                const matchesStatus =
+                    selectedStatus === "All" ||
+                    project.status === selectedStatus;
+
+                const matchesCategory =
+                    selectedCategory === "All" ||
+                    project.category === selectedCategory;
+
+                return matchesSearch &&
+                    matchesStatus &&
+                    matchesCategory;
+            });
+        }
+
+        /* Display project cards */
+
+        function renderProjects() {
+            updateStatistics();
+
+            const filteredProjects = getFilteredProjects();
+
+            projectList.replaceChildren();
+
+            emptyState.classList.add("hidden");
+            noResults.classList.add("hidden");
+
+            if (projects.length === 0) {
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            if (filteredProjects.length === 0) {
+                noResults.classList.remove("hidden");
+                return;
+            }
+
+            filteredProjects.forEach(project => {
+                const card = document.createElement("article");
+
+                card.className = "project-card";
+
+                let statusClass = "status-not-started";
+
+                if (project.status === "In Progress") {
+                    statusClass = "status-in-progress";
+                } else if (project.status === "Completed") {
+                    statusClass = "status-completed";
+                }
+
+                card.innerHTML = `
+                    <h3>📘 ${escapeHTML(project.name)}</h3>
+
+                    <p class="project-description">
+                        ${escapeHTML(
+                            project.description ||
+                            "A new project ready to begin."
+                        )}
+                    </p>
+
+                    <div class="badges">
+                        <span class="badge ${statusClass}">
+                            ${escapeHTML(project.status)}
+                        </span>
+
+                        <span class="badge category-badge">
+                            ${escapeHTML(project.category)}
+                        </span>
+                    </div>
+
+                    <div class="project-footer">
+                        <span class="project-date">
+                            📅 ${escapeHTML(formatDate(project.date))}
+                        </span>
+
+                        <div class="project-actions">
+                            <button
+                                type="button"
+                                class="btn btn-edit"
+                                data-action="edit"
+                            >
+                                ✏️ Edit
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-delete"
+                                data-action="delete"
+                            >
+                                🗑️ Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                card.querySelector('[data-action="edit"]')
+                    .addEventListener("click", function() {
+                        editProject(project.id);
+                    });
+
+                card.querySelector('[data-action="delete"]')
+                    .addEventListener("click", function() {
+                        deleteProject(project.id);
+                    });
+
+                projectList.appendChild(card);
+            });
+        }
+
+        /* Search and filter events */
+
+        searchInput.addEventListener("input", renderProjects);
+        statusFilter.addEventListener("change", renderProjects);
+        categoryFilter.addEventListener("change", renderProjects);
+
+        /* Start the application */
+
+        loadProjects();
+    </script>
+
 </body>
 </html>
