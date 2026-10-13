@@ -1,0 +1,1804 @@
+[1mdiff --git a/public/index.html b/public/index.html[m
+[1mindex ea0ba68..dc6513b 100644[m
+[1m--- a/public/index.html[m
+[1m+++ b/public/index.html[m
+[36m@@ -3,19 +3,9 @@[m
+ <head>[m
+     <meta charset="UTF-8">[m
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[31m-[m
+     <title>Student Project Tracker</title>[m
+ [m
+     <style>[m
+[31m-        :root {[m
+[31m-            --deep-blue: #021b38;[m
+[31m-            --ocean-blue: #075985;[m
+[31m-            --aqua: #67e8f9;[m
+[31m-            --mint: #a7f3d0;[m
+[31m-            --white: #ffffff;[m
+[31m-            --dark-text: #16364a;[m
+[31m-        }[m
+[31m-[m
+         * {[m
+             box-sizing: border-box;[m
+             margin: 0;[m
+[36m@@ -25,32 +15,15 @@[m
+         body {[m
+             min-height: 100vh;[m
+             font-family: "Segoe UI", Arial, sans-serif;[m
+[31m-            color: #ffffff;[m
+[31m-[m
+[32m+[m[32m            color: white;[m
+             background:[m
+[31m-                radial-gradient([m
+[31m-                    circle at 15% 10%,[m
+[31m-                    rgba(103, 232, 249, 0.22),[m
+[31m-                    transparent 32%[m
+[31m-                ),[m
+[31m-                radial-gradient([m
+[31m-                    circle at 85% 80%,[m
+[31m-                    rgba(167, 243, 208, 0.15),[m
+[31m-                    transparent 30%[m
+[31m-                ),[m
+[31m-                linear-gradient([m
+[31m-                    135deg,[m
+[31m-                    #021b38,[m
+[31m-                    #064e75,[m
+[31m-                    #087e8b[m
+[31m-                );[m
+[31m-[m
+[32m+[m[32m                radial-gradient(circle at 15% 10%, rgba(103,232,249,.22), transparent 32%),[m
+[32m+[m[32m                radial-gradient(circle at 85% 80%, rgba(167,243,208,.15), transparent 30%),[m
+[32m+[m[32m                linear-gradient(135deg, #021b38, #064e75, #087e8b);[m
+             overflow-x: hidden;[m
+         }[m
+ [m
+[31m-        button,[m
+[31m-        input,[m
+[31m-        select {[m
+[32m+[m[32m        button, input, select, textarea {[m
+             font: inherit;[m
+         }[m
+ [m
+[36m@@ -58,8 +31,6 @@[m
+             cursor: pointer;[m
+         }[m
+ [m
+[31m-        /* Animated underwater background */[m
+[31m-[m
+         .ocean-background {[m
+             position: fixed;[m
+             inset: 0;[m
+[36m@@ -70,118 +41,70 @@[m
+ [m
+         .bubble {[m
+             position: absolute;[m
+[31m-            bottom: -80px;[m
+[32m+[m[32m            bottom: -50px;[m
+[32m+[m[32m            left: 15%;[m
+             width: 18px;[m
+             height: 18px;[m
+[31m-            border: 1px solid rgba(255, 255, 255, 0.6);[m
+[32m+[m[32m            border: 1px solid rgba(255,255,255,.5);[m
+             border-radius: 50%;[m
+[31m-            background: rgba(255, 255, 255, 0.08);[m
+             animation: floatUp 12s linear infinite;[m
+         }[m
+ [m
+         .bubble:nth-child(2) {[m
+[31m-            left: 12%;[m
+[31m-            width: 12px;[m
+[31m-            height: 12px;[m
+[32m+[m[32m            left: 35%;[m
+             animation-delay: 2s;[m
+         }[m
+ [m
+         .bubble:nth-child(3) {[m
+[31m-            left: 28%;[m
+[31m-            width: 25px;[m
+[31m-            height: 25px;[m
+[31m-            animation-duration: 15s;[m
+[32m+[m[32m            left: 55%;[m
+[32m+[m[32m            animation-delay: 4s;[m
+         }[m
+ [m
+         .bubble:nth-child(4) {[m
+[31m-            left: 47%;[m
+[31m-            animation-delay: 3s;[m
+[32m+[m[32m            left: 75%;[m
+[32m+[m[32m            animation-delay: 1s;[m
+         }[m
+ [m
+         .bubble:nth-child(5) {[m
+[31m-            left: 65%;[m
+[31m-            width: 14px;[m
+[31m-            height: 14px;[m
+[31m-            animation-duration: 10s;[m
+[31m-        }[m
+[31m-[m
+[31m-        .bubble:nth-child(6) {[m
+[31m-            left: 82%;[m
+[31m-            animation-delay: 4s;[m
+[31m-        }[m
+[31m-[m
+[31m-        .bubble:nth-child(7) {[m
+[31m-            left: 94%;[m
+[31m-            width: 24px;[m
+[31m-            height: 24px;[m
+[31m-            animation-duration: 14s;[m
+[32m+[m[32m            left: 90%;[m
+[32m+[m[32m            animation-delay: 6s;[m
+         }[m
+ [m
+         @keyframes floatUp {[m
+[31m-            0% {[m
+[31m-                transform: translateY(0);[m
+[31m-                opacity: 0;[m
+[31m-            }[m
+[31m-[m
+[31m-            15% {[m
+[31m-                opacity: 0.8;[m
+[31m-            }[m
+[31m-[m
+[31m-            100% {[m
+[31m-                transform: translateY(-120vh) translateX(30px);[m
+[32m+[m[32m            to {[m
+[32m+[m[32m                transform: translateY(-120vh);[m
+                 opacity: 0;[m
+             }[m
+         }[m
+ [m
+[31m-        /* Floating sea creatures */[m
+[31m-[m
+         .sea-creature {[m
+             position: fixed;[m
+             z-index: 1;[m
+[31m-            font-size: 40px;[m
+[32m+[m[32m            font-size: 36px;[m
+             pointer-events: none;[m
+             animation: swim 5s ease-in-out infinite;[m
+         }[m
+ [m
+         .turtle {[m
+[31m-            top: 120px;[m
+[32m+[m[32m            top: 22%;[m
+             left: 2%;[m
+         }[m
+ [m
+         .jellyfish {[m
+[31m-            top: 200px;[m
+[31m-            right: 3%;[m
+[31m-            animation-delay: 1s;[m
+[31m-        }[m
+[31m-[m
+[31m-        .fish {[m
+[31m-            bottom: 100px;[m
+[31m-            left: 3%;[m
+[31m-            animation-delay: 2s;[m
+[31m-        }[m
+[31m-[m
+[31m-        .octopus {[m
+[31m-            bottom: 65px;[m
+[31m-            right: 3%;[m
+[31m-            animation-delay: 1.5s;[m
+[32m+[m[32m            top: 30%;[m
+[32m+[m[32m            right: 2%;[m
+         }[m
+ [m
+         @keyframes swim {[m
+[31m-            0%, 100% {[m
+[31m-                transform: translateY(0) rotate(-4deg);[m
+[31m-            }[m
+[31m-[m
+             50% {[m
+[31m-                transform: translateY(-16px) rotate(4deg);[m
+[32m+[m[32m                transform: translateY(-15px);[m
+             }[m
+         }[m
+ [m
+[31m-        /* Main page */[m
+[31m-[m
+         .container {[m
+             width: min(1080px, 92%);[m
+             margin: auto;[m
+[31m-            padding: 35px 0 25px;[m
+[32m+[m[32m            padding: 35px 0;[m
+             position: relative;[m
+             z-index: 2;[m
+         }[m
+[36m@@ -195,9 +118,9 @@[m
+             display: inline-block;[m
+             padding: 8px 16px;[m
+             margin-bottom: 15px;[m
+[31m-            border: 1px solid rgba(255, 255, 255, 0.3);[m
+[32m+[m[32m            border: 1px solid rgba(255,255,255,.3);[m
+             border-radius: 30px;[m
+[31m-            background: rgba(255, 255, 255, 0.1);[m
+[32m+[m[32m            background: rgba(255,255,255,.1);[m
+             color: #a5f3fc;[m
+             font-size: 12px;[m
+             font-weight: 800;[m
+[36m@@ -205,18 +128,15 @@[m
+         }[m
+ [m
+         h1 {[m
+[31m-            color: #ffffff;[m
+[31m-            font-size: clamp(32px, 5vw, 50px);[m
+[32m+[m[32m            font-size: clamp(30px, 5vw, 50px);[m
+             font-weight: 850;[m
+[31m-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);[m
+         }[m
+ [m
+         .subtitle {[m
+[31m-            max-width: 600px;[m
+[32m+[m[32m            max-width: 650px;[m
+             margin: 12px auto;[m
+             color: #e0faff;[m
+             line-height: 1.7;[m
+[31m-            font-size: 15px;[m
+         }[m
+ [m
+         .decorations {[m
+[36m@@ -225,8 +145,6 @@[m
+             letter-spacing: 8px;[m
+         }[m
+ [m
+[31m-        /* Statistics */[m
+[31m-[m
+         .stats {[m
+             display: grid;[m
+             grid-template-columns: repeat(3, 1fr);[m
+[36m@@ -234,23 +152,25 @@[m
+             margin-bottom: 22px;[m
+         }[m
+ [m
+[32m+[m[32m        .stat-card, .panel {[m
+[32m+[m[32m            border: 1px solid rgba(255,255,255,.23);[m
+[32m+[m[32m            border-radius: 22px;[m
+[32m+[m[32m            background: rgba(255,255,255,.12);[m
+[32m+[m[32m            backdrop-filter: blur(12px);[m
+[32m+[m[32m            box-shadow: 0 8px 25px rgba(0,0,0,.12);[m
+[32m+[m[32m        }[m
+[32m+[m
+         .stat-card {[m
+[31m-            padding: 20px 10px;[m
+[32m+[m[32m            padding: 22px 10px;[m
+             text-align: center;[m
+[31m-            border: 1px solid rgba(255, 255, 255, 0.23);[m
+[31m-            border-radius: 20px;[m
+[31m-            background: rgba(255, 255, 255, 0.12);[m
+[31m-            backdrop-filter: blur(12px);[m
+[31m-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);[m
+         }[m
+ [m
+         .stat-icon {[m
+[31m-            font-size: 26px;[m
+[32m+[m[32m            font-size: 27px;[m
+         }[m
+ [m
+         .stat-number {[m
+             margin: 5px 0;[m
+[31m-            color: #ffffff;[m
+             font-size: 30px;[m
+             font-weight: 850;[m
+         }[m
+[36m@@ -260,16 +180,9 @@[m
+             font-size: 13px;[m
+         }[m
+ [m
+[31m-        /* Content panels */[m
+[31m-[m
+         .panel {[m
+             padding: 27px;[m
+             margin-bottom: 23px;[m
+[31m-            border: 1px solid rgba(255, 255, 255, 0.24);[m
+[31m-            border-radius: 23px;[m
+[31m-            background: rgba(255, 255, 255, 0.12);[m
+[31m-            backdrop-filter: blur(15px);[m
+[31m-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);[m
+         }[m
+ [m
+         .section-heading {[m
+[36m@@ -284,25 +197,17 @@[m
+             place-items: center;[m
+             width: 46px;[m
+             height: 46px;[m
+[31m-            border: 1px solid rgba(103, 232, 249, 0.35);[m
+             border-radius: 14px;[m
+[31m-            background: rgba(103, 232, 249, 0.16);[m
+[32m+[m[32m            background: rgba(103,232,249,.16);[m
+             font-size: 24px;[m
+         }[m
+ [m
+[31m-        .section-heading h2 {[m
+[31m-            color: #ffffff;[m
+[31m-            font-size: 21px;[m
+[31m-        }[m
+[31m-[m
+         .section-heading p {[m
+             margin-top: 4px;[m
+             color: #e0faff;[m
+             font-size: 13px;[m
+         }[m
+ [m
+[31m-        /* Form */[m
+[31m-[m
+         .form-grid {[m
+             display: grid;[m
+             grid-template-columns: repeat(2, minmax(0, 1fr));[m
+[36m@@ -320,13 +225,11 @@[m
+         }[m
+ [m
+         label {[m
+[31m-            color: #ffffff;[m
+             font-size: 14px;[m
+             font-weight: 750;[m
+         }[m
+ [m
+[31m-        input,[m
+[31m-        select {[m
+[32m+[m[32m        input, select, textarea {[m
+             width: 100%;[m
+             min-height: 46px;[m
+             padding: 12px 14px;[m
+[36m@@ -334,27 +237,18 @@[m
+             border-radius: 12px;[m
+             outline: none;[m
+             color: #16364a;[m
+[31m-            background: #ffffff;[m
+[32m+[m[32m            background: white;[m
+         }[m
+ [m
+[31m-        input::placeholder {[m
+[31m-            color: #64748b;[m
+[31m-            opacity: 1;[m
+[31m-        }[m
+[31m-[m
+[31m-        select option {[m
+[31m-            color: #16364a;[m
+[31m-            background: #ffffff;[m
+[32m+[m[32m        textarea {[m
+[32m+[m[32m            min-height: 100px;[m
+[32m+[m[32m            resize: vertical;[m
+         }[m
+ [m
+[31m-        input:focus,[m
+[31m-        select:focus {[m
+[32m+[m[32m        input:focus, select:focus, textarea:focus {[m
+             border-color: #67e8f9;[m
+[31m-            box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.2);[m
+         }[m
+ [m
+[31m-        /* Buttons */[m
+[31m-[m
+         .button-row {[m
+             display: flex;[m
+             flex-wrap: wrap;[m
+[36m@@ -363,11 +257,11 @@[m
+         }[m
+ [m
+         .btn {[m
+[31m-            padding: 12px 19px;[m
+[32m+[m[32m            padding: 11px 16px;[m
+             border: none;[m
+[31m-            border-radius: 12px;[m
+[32m+[m[32m            border-radius: 11px;[m
+             font-weight: 800;[m
+[31m-            transition: transform 0.2s, box-shadow 0.2s;[m
+[32m+[m[32m            transition: transform .2s;[m
+         }[m
+ [m
+         .btn:hover {[m
+[36m@@ -377,35 +271,28 @@[m
+         .btn-primary {[m
+             color: #063047;[m
+             background: linear-gradient(135deg, #a7f3d0, #67e8f9);[m
+[31m-            box-shadow: 0 5px 17px rgba(103, 232, 249, 0.18);[m
+         }[m
+ [m
+         .btn-secondary {[m
+[31m-            color: #ffffff;[m
+[31m-            background: rgba(255, 255, 255, 0.15);[m
+[31m-            border: 1px solid rgba(255, 255, 255, 0.3);[m
+[32m+[m[32m            color: white;[m
+[32m+[m[32m            background: rgba(255,255,255,.15);[m
+[32m+[m[32m            border: 1px solid rgba(255,255,255,.3);[m
+         }[m
+ [m
+         .btn-edit {[m
+[31m-            padding: 9px 12px;[m
+             color: #063047;[m
+             background: #b5f4ff;[m
+[31m-            font-size: 12px;[m
+         }[m
+ [m
+         .btn-delete {[m
+[31m-            padding: 9px 12px;[m
+[31m-            color: #ffffff;[m
+[32m+[m[32m            color: white;[m
+             background: #c83e57;[m
+[31m-            font-size: 12px;[m
+         }[m
+ [m
+         .hidden {[m
+             display: none !important;[m
+         }[m
+ [m
+[31m-        /* Search and filters */[m
+[31m-[m
+         .toolbar {[m
+             display: grid;[m
+             grid-template-columns: 1.5fr 1fr 1fr;[m
+[36m@@ -413,8 +300,6 @@[m
+             margin-bottom: 20px;[m
+         }[m
+ [m
+[31m-        /* Project cards */[m
+[31m-[m
+         .project-list {[m
+             display: grid;[m
+             grid-template-columns: repeat(2, minmax(0, 1fr));[m
+[36m@@ -422,189 +307,109 @@[m
+         }[m
+ [m
+         .project-card {[m
+[31m-            padding: 21px;[m
+[31m-            border: 1px solid rgba(255, 255, 255, 0.8);[m
+[32m+[m[32m            padding: 20px;[m
+[32m+[m[32m            border: 1px solid rgba(255,255,255,.25);[m
+             border-radius: 18px;[m
+[31m-            color: #16364a;[m
+[31m-            background: #ffffff;[m
+[31m-            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.1);[m
+[31m-            animation: cardAppear 0.3s ease;[m
+[31m-        }[m
+[31m-[m
+[31m-        @keyframes cardAppear {[m
+[31m-            from {[m
+[31m-                opacity: 0;[m
+[31m-                transform: translateY(8px);[m
+[31m-            }[m
+[31m-[m
+[31m-            to {[m
+[31m-                opacity: 1;[m
+[31m-                transform: translateY(0);[m
+[31m-            }[m
+[32m+[m[32m            background: rgba(255,255,255,.11);[m
+[32m+[m[32m            overflow-wrap: anywhere;[m
+         }[m
+ [m
+         .project-card h3 {[m
+[31m-            margin-bottom: 11px;[m
+[31m-            color: #075985;[m
+[31m-            font-size: 19px;[m
+[31m-            overflow-wrap: anywhere;[m
+[32m+[m[32m            margin-bottom: 12px;[m
+[32m+[m[32m            font-size: 20px;[m
+         }[m
+ [m
+         .project-description {[m
+[31m-            margin-bottom: 14px;[m
+[31m-            color: #475569;[m
+[31m-            font-size: 14px;[m
+[32m+[m[32m            color: #e0faff;[m
+             line-height: 1.6;[m
+[31m-            overflow-wrap: anywhere;[m
+[32m+[m[32m            margin-bottom: 15px;[m
+[32m+[m[32m            white-space: pre-wrap;[m
+         }[m
+ [m
+         .badges {[m
+             display: flex;[m
+             flex-wrap: wrap;[m
+             gap: 8px;[m
+[31m-            margin-bottom: 16px;[m
+[32m+[m[32m            margin-bottom: 18px;[m
+         }[m
+ [m
+         .badge {[m
+[31m-            display: inline-block;[m
+             padding: 6px 10px;[m
+             border-radius: 20px;[m
+[31m-            font-size: 11px;[m
+[32m+[m[32m            color: #063047;[m
+[32m+[m[32m            background: #a7f3d0;[m
+[32m+[m[32m            font-size: 12px;[m
+             font-weight: 800;[m
+         }[m
+ [m
+[31m-        .status-not-started {[m
+[31m-            color: #334155;[m
+[31m-            background: #e2e8f0;[m
+[31m-        }[m
+[31m-[m
+         .status-in-progress {[m
+[31m-            color: #854d0e;[m
+[31m-            background: #fef3c7;[m
+[32m+[m[32m            background: #fde68a;[m
+         }[m
+ [m
+         .status-completed {[m
+[31m-            color: #166534;[m
+[31m-            background: #dcfce7;[m
+[32m+[m[32m            background: #86efac;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        .status-not-started {[m
+[32m+[m[32m            background: #bfdbfe;[m
+         }[m
+ [m
+         .category-badge {[m
+[31m-            color: #075985;[m
+[31m-            background: #cffafe;[m
+[32m+[m[32m            background: #ddd6fe;[m
+         }[m
+ [m
+         .project-footer {[m
+             display: flex;[m
+[31m-            flex-wrap: wrap;[m
+[31m-            align-items: center;[m
+[31m-            justify-content: space-between;[m
+[31m-            gap: 10px;[m
+[31m-            padding-top: 13px;[m
+[31m-            border-top: 1px solid #e2e8f0;[m
+[32m+[m[32m            flex-direction: column;[m
+[32m+[m[32m            gap: 13px;[m
+[32m+[m[32m            padding-top: 14px;[m
+[32m+[m[32m            border-top: 1px solid rgba(255,255,255,.18);[m
+         }[m
+ [m
+         .project-date {[m
+[31m-            color: #64748b;[m
+[31m-            font-size: 12px;[m
+[32m+[m[32m            color: #e0faff;[m
+[32m+[m[32m            font-size: 13px;[m
+         }[m
+ [m
+         .project-actions {[m
+             display: flex;[m
+[31m-            gap: 8px;[m
+[32m+[m[32m            flex-wrap: wrap;[m
+[32m+[m[32m            gap: 9px;[m
+         }[m
+ [m
+[31m-        /* Empty messages */[m
+[31m-[m
+         .empty-state {[m
+[31m-            padding: 40px 20px;[m
+[31m-            border: 1px dashed rgba(255, 255, 255, 0.4);[m
+[31m-            border-radius: 17px;[m
+[31m-            background: rgba(255, 255, 255, 0.05);[m
+[32m+[m[32m            padding: 35px 10px;[m
+             text-align: center;[m
+[31m-        }[m
+[31m-[m
+[31m-        .empty-icon {[m
+[31m-            margin-bottom: 12px;[m
+[31m-            font-size: 46px;[m
+[31m-        }[m
+[31m-[m
+[31m-        .empty-state h3 {[m
+[31m-            margin-bottom: 8px;[m
+[31m-            color: #ffffff;[m
+[31m-        }[m
+[31m-[m
+[31m-        .empty-state p {[m
+             color: #e0faff;[m
+[31m-            font-size: 14px;[m
+[31m-            line-height: 1.7;[m
+[32m+[m[32m            line-height: 1.8;[m
+         }[m
+ [m
+         footer {[m
+[31m-            padding: 15px 0;[m
+[31m-            color: #e0faff;[m
+[31m-            font-size: 13px;[m
+[31m-            line-height: 1.8;[m
+             text-align: center;[m
+[32m+[m[32m            color: #d7f5ff;[m
+[32m+[m[32m            font-size: 13px;[m
+[32m+[m[32m            padding: 10px;[m
+         }[m
+ [m
+[31m-        footer .footer-icons {[m
+[31m-            margin-bottom: 8px;[m
+[31m-            font-size: 23px;[m
+[31m-        }[m
+[31m-[m
+[31m-        /* Mobile-friendly layout */[m
+[31m-[m
+         @media (max-width: 700px) {[m
+[31m-            .container {[m
+[31m-                width: 94%;[m
+[31m-                padding-top: 25px;[m
+[31m-            }[m
+[31m-[m
+             .stats {[m
+[31m-                gap: 8px;[m
+[31m-            }[m
+[31m-[m
+[31m-            .stat-card {[m
+[31m-                padding: 15px 5px;[m
+[31m-            }[m
+[31m-[m
+[31m-            .stat-number {[m
+[31m-                font-size: 24px;[m
+[31m-            }[m
+[31m-[m
+[31m-            .stat-label {[m
+[31m-                font-size: 11px;[m
+[31m-            }[m
+[31m-[m
+[31m-            .panel {[m
+[31m-                padding: 19px;[m
+[31m-            }[m
+[31m-[m
+[31m-            .form-grid,[m
+[31m-            .project-list {[m
+                 grid-template-columns: 1fr;[m
+             }[m
+ [m
+[31m-            .toolbar {[m
+[32m+[m[32m            .form-grid, .project-list, .toolbar {[m
+                 grid-template-columns: 1fr;[m
+             }[m
+ [m
+[31m-            .sea-creature {[m
+[31m-                font-size: 29px;[m
+[31m-                opacity: 0.55;[m
+[32m+[m[32m            .panel {[m
+[32m+[m[32m                padding: 18px;[m
+             }[m
+ [m
+[31m-            .section-heading h2 {[m
+[31m-                font-size: 18px;[m
+[32m+[m[32m            .full-width {[m
+[32m+[m[32m                grid-column: auto;[m
+             }[m
+[31m-        }[m
+ [m
+[31m-        @media (prefers-reduced-motion: reduce) {[m
+[31m-            *,[m
+[31m-            *::before,[m
+[31m-            *::after {[m
+[31m-                animation-duration: 0.01ms !important;[m
+[31m-                animation-iteration-count: 1 !important;[m
+[32m+[m[32m            .sea-creature {[m
+[32m+[m[32m                font-size: 25px;[m
+             }[m
+         }[m
+     </style>[m
+[36m@@ -612,44 +417,30 @@[m
+ [m
+ <body>[m
+ [m
+[31m-    <!-- Ocean background -->[m
+     <div class="ocean-background" aria-hidden="true">[m
+         <div class="bubble"></div>[m
+         <div class="bubble"></div>[m
+         <div class="bubble"></div>[m
+         <div class="bubble"></div>[m
+         <div class="bubble"></div>[m
+[31m-        <div class="bubble"></div>[m
+[31m-        <div class="bubble"></div>[m
+     </div>[m
+ [m
+[31m-    <!-- Sea creatures -->[m
+     <div class="sea-creature turtle" aria-hidden="true">🐢</div>[m
+     <div class="sea-creature jellyfish" aria-hidden="true">🪼</div>[m
+[31m-    <div class="sea-creature fish" aria-hidden="true">🐠</div>[m
+[31m-    <div class="sea-creature octopus" aria-hidden="true">🐙</div>[m
+ [m
+     <main class="container">[m
+ [m
+[31m-        <!-- Page header -->[m
+         <header>[m
+[31m-            <div class="eyebrow">🎓 ORGANIZE • LEARN • ACHIEVE</div>[m
+[31m-[m
+[32m+[m[32m            <span class="eyebrow">🎓 ORGANIZE • LEARN • ACHIEVE</span>[m
+             <h1>Student Project Tracker</h1>[m
+[31m-[m
+             <p class="subtitle">[m
+[31m-                Track your ideas, organize your projects, and celebrate[m
+[31m-                every achievement. Your learning journey starts here![m
+[32m+[m[32m                Track your ideas, organize your projects, and celebrate every[m
+[32m+[m[32m                achievement. Your learning journey starts here![m
+             </p>[m
+[31m-[m
+[31m-            <div class="decorations" aria-hidden="true">[m
+[31m-                🐚 🪸 🫧[m
+[31m-            </div>[m
+[32m+[m[32m            <div class="decorations">🐚 🪸 🫧</div>[m
+         </header>[m
+ [m
+[31m-        <!-- Project statistics -->[m
+[31m-        <section class="stats" aria-label="Project statistics">[m
+[31m-[m
+[32m+[m[32m        <section class="stats">[m
+             <div class="stat-card">[m
+                 <div class="stat-icon">📚</div>[m
+                 <div class="stat-number" id="totalCount">0</div>[m
+[36m@@ -667,15 +458,11 @@[m
+                 <div class="stat-number" id="completedCount">0</div>[m
+                 <div class="stat-label">Completed</div>[m
+             </div>[m
+[31m-[m
+         </section>[m
+ [m
+[31m-        <!-- Add or edit project -->[m
+[31m-        <section class="panel">[m
+[31m-[m
+[32m+[m[32m        <section class="panel" id="formPanel">[m
+             <div class="section-heading">[m
+                 <div class="section-icon">📝</div>[m
+[31m-[m
+                 <div>[m
+                     <h2 id="formTitle">Add a Project</h2>[m
+                     <p>Enter your project details below.</p>[m
+[36m@@ -683,38 +470,30 @@[m
+             </div>[m
+ [m
+             <form id="projectForm">[m
+[31m-[m
+                 <div class="form-grid">[m
+ [m
+                     <div class="form-group">[m
+                         <label for="projectName">Project Name *</label>[m
+[31m-[m
+[31m-                        <input[m
+[31m-                            type="text"[m
+[31m-                            id="projectName"[m
+[31m-                            placeholder="e.g. IoT Monitor"[m
+[31m-                            maxlength="100"[m
+[31m-                            required[m
+[31m-                        >[m
+[32m+[m[32m                        <input id="projectName" type="text"[m
+[32m+[m[32m                               placeholder="e.g. IoT Monitor" required>[m
+                     </div>[m
+ [m
+                     <div class="form-group">[m
+                         <label for="projectCategory">Category *</label>[m
+[31m-[m
+                         <select id="projectCategory" required>[m
+                             <option value="">Choose a category</option>[m
+[31m-                            <option value="Web Development">Web Development</option>[m
+                             <option value="Electronics">Electronics</option>[m
+                             <option value="IoT">IoT</option>[m
+                             <option value="Robotics">Robotics</option>[m
+[31m-                            <option value="Research">Research</option>[m
+[32m+[m[32m                            <option value="Web Development">Web Development</option>[m
+[32m+[m[32m                            <option value="Programming">Programming</option>[m
+[32m+[m[32m                            <option value="Mechanical">Mechanical</option>[m
+                             <option value="Other">Other</option>[m
+                         </select>[m
+                     </div>[m
+ [m
+                     <div class="form-group">[m
+                         <label for="projectStatus">Project Status *</label>[m
+[31m-[m
+                         <select id="projectStatus" required>[m
+                             <option value="Planned">Planned</option>[m
+                             <option value="In Progress">In Progress</option>[m
+[36m@@ -724,67 +503,46 @@[m
+ [m
+                     <div class="form-group">[m
+                         <label for="projectDate">Target Date</label>[m
+[31m-[m
+[31m-                        <input type="date" id="projectDate">[m
+[32m+[m[32m                        <input id="projectDate" type="date">[m
+                     </div>[m
+ [m
+                     <div class="form-group full-width">[m
+                         <label for="projectDescription">Description</label>[m
+[31m-[m
+[31m-                        <input[m
+[31m-                            type="text"[m
+[31m-                            id="projectDescription"[m
+[31m-                            placeholder="What is your project about?"[m
+[31m-                            maxlength="250"[m
+[31m-                        >[m
+[32m+[m[32m                        <textarea id="projectDescription"[m
+[32m+[m[32m                            placeholder="Describe your project..."></textarea>[m
+                     </div>[m
+ [m
+                 </div>[m
+ [m
+                 <div class="button-row">[m
+[31m-[m
+[31m-                    <button[m
+[31m-                        type="submit"[m
+[31m-                        class="btn btn-primary"[m
+[31m-                        id="submitButton"[m
+[31m-                    >[m
+[32m+[m[32m                    <button type="submit" class="btn btn-primary" id="submitButton">[m
+                         ➕ Add Project[m
+                     </button>[m
+ [m
+[31m-                    <button[m
+[31m-                        type="button"[m
+[31m-                        class="btn btn-secondary hidden"[m
+[31m-                        id="cancelEditButton"[m
+[31m-                    >[m
+[31m-                        ✖ Cancel Edit[m
+[32m+[m[32m                    <button type="button" class="btn btn-secondary hidden"[m
+[32m+[m[32m                            id="cancelEditButton">[m
+[32m+[m[32m                        Cancel Edit[m
+                     </button>[m
+ [m
+[32m+[m[32m                    <button type="reset" class="btn btn-secondary" id="clearButton">[m
+[32m+[m[32m                        Clear Form[m
+[32m+[m[32m                    </button>[m
+                 </div>[m
+[31m-[m
+             </form>[m
+         </section>[m
+ [m
+[31m-        <!-- Project list -->[m
+         <section class="panel">[m
+[31m-[m
+             <div class="section-heading">[m
+[31m-                <div class="section-icon">📂</div>[m
+[31m-[m
+[32m+[m[32m                <div class="section-icon">🔎</div>[m
+                 <div>[m
+[31m-                    <h2>Your Project List</h2>[m
+[31m-                    <p>View, search, update, and organize your work.</p>[m
+[32m+[m[32m                    <h2>Your Projects</h2>[m
+[32m+[m[32m                    <p>Search, filter, edit, or delete your projects.</p>[m
+                 </div>[m
+             </div>[m
+ [m
+[31m-            <!-- Search and filters -->[m
+             <div class="toolbar">[m
+[31m-[m
+[31m-                <input[m
+[31m-                    type="search"[m
+[31m-                    id="searchInput"[m
+[31m-                    placeholder="🔎 Search projects..."[m
+[31m-                    aria-label="Search projects"[m
+[31m-                >[m
+[32m+[m[32m                <input id="searchInput" type="search"[m
+[32m+[m[32m                       placeholder="🔍 Search projects...">[m
+ [m
+                 <select id="statusFilter" aria-label="Filter by status">[m
+                     <option value="All">All Statuses</option>[m
+[36m@@ -795,42 +553,33 @@[m
+ [m
+                 <select id="categoryFilter" aria-label="Filter by category">[m
+                     <option value="All">All Categories</option>[m
+[31m-                    <option value="Web Development">Web Development</option>[m
+                     <option value="Electronics">Electronics</option>[m
+                     <option value="IoT">IoT</option>[m
+                     <option value="Robotics">Robotics</option>[m
+[31m-                    <option value="Research">Research</option>[m
+[32m+[m[32m                    <option value="Web Development">Web Development</option>[m
+[32m+[m[32m                    <option value="Programming">Programming</option>[m
+[32m+[m[32m                    <option value="Mechanical">Mechanical</option>[m
+                     <option value="Other">Other</option>[m
+                 </select>[m
+[31m-[m
+             </div>[m
+ [m
+             <div id="projectList" class="project-list"></div>[m
+ [m
+             <div id="emptyState" class="empty-state">[m
+[31m-                <div class="empty-icon">📘</div>[m
+[32m+[m[32m                <div style="font-size:45px;">🐠</div>[m
+                 <h3>No projects yet!</h3>[m
+                 <p>Add your first project using the form above.</p>[m
+             </div>[m
+ [m
+             <div id="noResults" class="empty-state hidden">[m
+[31m-                <div class="empty-icon">🔍</div>[m
+[31m-                <h3>No projects found</h3>[m
+[32m+[m[32m                <div style="font-size:40px;">🔍</div>[m
+[32m+[m[32m                <h3>No matching projects found</h3>[m
+                 <p>Try another search term or change your filters.</p>[m
+             </div>[m
+[31m-[m
+         </section>[m
+ [m
+         <footer>[m
+[31m-            <div class="footer-icons" aria-hidden="true">[m
+[31m-                📚 💻 ⚙️ 🎓[m
+[31m-            </div>[m
+[31m-[m
+[31m-            Made for curious minds and creative students.[m
+[31m-[m
+[31m-            <br>[m
+[31m-[m
+[31m-            Learn something new every day! ✨[m
+[32m+[m[32m            🌊 Student Project Tracker • Organize your ideas and achieve your goals![m
+         </footer>[m
+ [m
+     </main>[m
+[36m@@ -838,10 +587,9 @@[m
+     <script>[m
+         "use strict";[m
+ [m
+[31m-        /* Get HTML elements */[m
+[32m+[m[32m        const STORAGE_KEY = "studentProjectTrackerProjects";[m
+ [m
+         const projectForm = document.getElementById("projectForm");[m
+[31m-[m
+         const projectName = document.getElementById("projectName");[m
+         const projectCategory = document.getElementById("projectCategory");[m
+         const projectStatus = document.getElementById("projectStatus");[m
+[36m@@ -849,9 +597,6 @@[m
+         const projectDescription = document.getElementById("projectDescription");[m
+ [m
+         const projectList = document.getElementById("projectList");[m
+[31m-        const emptyState = document.getElementById("emptyState");[m
+[31m-        const noResults = document.getElementById("noResults");[m
+[31m-[m
+         const searchInput = document.getElementById("searchInput");[m
+         const statusFilter = document.getElementById("statusFilter");[m
+         const categoryFilter = document.getElementById("categoryFilter");[m
+[36m@@ -860,73 +605,78 @@[m
+         const progressCount = document.getElementById("progressCount");[m
+         const completedCount = document.getElementById("completedCount");[m
+ [m
+[32m+[m[32m        const emptyState = document.getElementById("emptyState");[m
+[32m+[m[32m        const noResults = document.getElementById("noResults");[m
+[32m+[m
+         const formTitle = document.getElementById("formTitle");[m
+         const submitButton = document.getElementById("submitButton");[m
+         const cancelEditButton = document.getElementById("cancelEditButton");[m
+[31m-[m
+[31m-        const STORAGE_KEY = "studentTrackerProjects";[m
+[32m+[m[32m        const clearButton = document.getElementById("clearButton");[m
+ [m
+         let projects = [];[m
+         let editingProjectId = null;[m
+ [m
+[31m-        /* Load projects saved in this browser */[m
+[31m-[m
+[32m+[m[32m        // Load projects saved in the browser.[m
+         function loadProjects() {[m
+             try {[m
+                 const saved = localStorage.getItem(STORAGE_KEY);[m
+[31m-[m
+[31m-                if (saved) {[m
+[31m-                    const parsed = JSON.parse(saved);[m
+[31m-[m
+[31m-                    if (Array.isArray(parsed)) {[m
+[31m-                        projects = parsed.map(project => ({[m
+[31m-                            ...project,[m
+[31m-                            category: project.category || "Other",[m
+[31m-                            status: project.status || "Planned",[m
+[31m-                            description: project.description || "",[m
+[31m-                            date: project.date || ""[m
+[31m-                        }));[m
+[31m-                    }[m
+[31m-                }[m
+[32m+[m[32m                const parsed = saved ? JSON.parse(saved) : [];[m
+[32m+[m
+[32m+[m[32m                projects = Array.isArray(parsed)[m
+[32m+[m[32m                    ? parsed.filter(p => p && typeof p === "object")[m
+[32m+[m[32m                    : [];[m
+[32m+[m
+[32m+[m[32m                // Give older projects an ID if they don't have one.[m
+[32m+[m[32m                projects = projects.map((project, index) => ({[m
+[32m+[m[32m                    ...project,[m
+[32m+[m[32m                    id: project.id ?? ("old-" + index + "-" + Date.now()),[m
+[32m+[m[32m                    name: String(project.name ?? "Untitled Project"),[m
+[32m+[m[32m                    category: String(project.category ?? "Other"),[m
+[32m+[m[32m                    status: String(project.status ?? "Planned"),[m
+[32m+[m[32m                    date: String(project.date ?? ""),[m
+[32m+[m[32m                    description: String(project.description ?? "")[m
+[32m+[m[32m                }));[m
+[32m+[m
+[32m+[m[32m                saveProjects();[m
+             } catch (error) {[m
+[31m-                console.error("Unable to load projects:", error);[m
+[32m+[m[32m                console.error("Could not load projects:", error);[m
+                 projects = [];[m
+             }[m
+ [m
+             renderProjects();[m
+         }[m
+ [m
+[31m-        /* Save projects */[m
+[31m-[m
+[32m+[m[32m        // Save projects in browser Local Storage.[m
+         function saveProjects() {[m
+             try {[m
+[31m-                localStorage.setItem([m
+[31m-                    STORAGE_KEY,[m
+[31m-                    JSON.stringify(projects)[m
+[31m-                );[m
+[32m+[m[32m                localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));[m
+             } catch (error) {[m
+[31m-                console.error("Unable to save projects:", error);[m
+[31m-[m
+[31m-                alert("Unable to save projects in this browser.");[m
+[32m+[m[32m                console.error("Could not save projects:", error);[m
+[32m+[m[32m                alert("Projects could not be saved in this browser.");[m
+             }[m
+         }[m
+ [m
+[31m-        /* Generate a unique project ID */[m
+[31m-[m
+[32m+[m[32m        // Create a unique ID.[m
+         function createProjectId() {[m
+[31m-            if ([m
+[31m-                window.crypto &&[m
+[32m+[m[32m            return window.crypto &&[m
+                 typeof window.crypto.randomUUID === "function"[m
+[31m-            ) {[m
+[31m-                return window.crypto.randomUUID();[m
+[31m-            }[m
+[31m-[m
+[31m-            return Date.now().toString(36) +[m
+[31m-                Math.random().toString(36).slice(2);[m
+[32m+[m[32m                ? window.crypto.randomUUID()[m
+[32m+[m[32m                : Date.now().toString(36) +[m
+[32m+[m[32m                  Math.random().toString(36).slice(2);[m
+         }[m
+ [m
+[31m-        /* Add or update a project */[m
+[32m+[m[32m        // Escape text before displaying it in HTML.[m
+[32m+[m[32m        function escapeHTML(value) {[m
+[32m+[m[32m            return String(value ?? "").replace(/[&<>"']/g, character => ({[m
+[32m+[m[32m                "&": "&amp;",[m
+[32m+[m[32m                "<": "&lt;",[m
+[32m+[m[32m                ">": "&gt;",[m
+[32m+[m[32m                '"': "&quot;",[m
+[32m+[m[32m                "'": "&#39;"[m
+[32m+[m[32m            })[character]);[m
+[32m+[m[32m        }[m
+ [m
+[32m+[m[32m        // Add a project or save changes to an existing project.[m
+         projectForm.addEventListener("submit", function(event) {[m
+             event.preventDefault();[m
+ [m
+[36m@@ -970,59 +720,47 @@[m
+             renderProjects();[m
+         });[m
+ [m
+[31m-        /* Reset form */[m
+[31m-[m
+[32m+[m[32m        // Reset the form.[m
+         function resetForm() {[m
+             projectForm.reset();[m
+[31m-[m
+             editingProjectId = null;[m
+ [m
+             formTitle.textContent = "Add a Project";[m
+             submitButton.textContent = "➕ Add Project";[m
+[31m-[m
+             cancelEditButton.classList.add("hidden");[m
+         }[m
+ [m
+         cancelEditButton.addEventListener("click", resetForm);[m
+ [m
+[31m-        /* Protect text before adding it to HTML */[m
+[31m-[m
+[31m-        function escapeHTML(value) {[m
+[31m-            return String(value ?? "").replace([m
+[31m-                /[&<>"']/g,[m
+[31m-                character => ({[m
+[31m-                    "&": "&amp;",[m
+[31m-                    "<": "&lt;",[m
+[31m-                    ">": "&gt;",[m
+[31m-                    '"': "&quot;",[m
+[31m-                    "'": "&#39;"[m
+[31m-                })[character][m
+[31m-            );[m
+[31m-        }[m
+[31m-[m
+[31m-        /* Edit project */[m
+[32m+[m[32m        clearButton.addEventListener("click", function() {[m
+[32m+[m[32m            editingProjectId = null;[m
+[32m+[m[32m            formTitle.textContent = "Add a Project";[m
+[32m+[m[32m            submitButton.textContent = "➕ Add Project";[m
+[32m+[m[32m            cancelEditButton.classList.add("hidden");[m
+[32m+[m[32m        });[m
+ [m
+[32m+[m[32m        // Edit a project.[m
+         function editProject(id) {[m
+             const project = projects.find(item => item.id === id);[m
+ [m
+             if (!project) {[m
+[32m+[m[32m                alert("Project not found.");[m
+                 return;[m
+             }[m
+ [m
+             editingProjectId = id;[m
+ [m
+             projectName.value = project.name;[m
+[31m-            projectCategory.value = project.category || "Other";[m
+[31m-            projectStatus.value = project.status || "Planned";[m
+[31m-            projectDate.value = project.date || "";[m
+[31m-            projectDescription.value = project.description || "";[m
+[32m+[m[32m            projectCategory.value = project.category;[m
+[32m+[m[32m            projectStatus.value = project.status;[m
+[32m+[m[32m            projectDate.value = project.date;[m
+[32m+[m[32m            projectDescription.value = project.description;[m
+ [m
+             formTitle.textContent = "Edit Project";[m
+             submitButton.textContent = "💾 Save Changes";[m
+[31m-[m
+             cancelEditButton.classList.remove("hidden");[m
+ [m
+[31m-            projectForm.scrollIntoView({[m
+[32m+[m[32m            document.getElementById("formPanel").scrollIntoView({[m
+                 behavior: "smooth",[m
+                 block: "start"[m
+             });[m
+[36m@@ -1030,22 +768,16 @@[m
+             projectName.focus();[m
+         }[m
+ [m
+[31m-        /* Delete project */[m
+[31m-[m
+[32m+[m[32m        // Delete a project.[m
+         function deleteProject(id) {[m
+             const project = projects.find(item => item.id === id);[m
+ [m
+             if (!project) {[m
+[32m+[m[32m                alert("Project not found.");[m
+                 return;[m
+             }[m
+ [m
+[31m-            const confirmed = confirm([m
+[31m-                'Are you sure you want to delete "' +[m
+[31m-                project.name +[m
+[31m-                '"?'[m
+[31m-            );[m
+[31m-[m
+[31m-            if (!confirmed) {[m
+[32m+[m[32m            if (!confirm('Delete "' + project.name + '"?')) {[m
+                 return;[m
+             }[m
+ [m
+[36m@@ -1059,8 +791,7 @@[m
+             renderProjects();[m
+         }[m
+ [m
+[31m-        /* Format date */[m
+[31m-[m
+[32m+[m[32m        // Format a date.[m
+         function formatDate(value) {[m
+             if (!value) {[m
+                 return "No target date";[m
+[36m@@ -1075,8 +806,7 @@[m
+             return parts[2] + "/" + parts[1] + "/" + parts[0];[m
+         }[m
+ [m
+[31m-        /* Update statistics */[m
+[31m-[m
+[32m+[m[32m        // Update the statistics.[m
+         function updateStatistics() {[m
+             totalCount.textContent = projects.length;[m
+ [m
+[36m@@ -1089,11 +819,9 @@[m
+             ).length;[m
+         }[m
+ [m
+[31m-        /* Search and filter projects */[m
+[31m-[m
+[32m+[m[32m        // Search and filter projects.[m
+         function getFilteredProjects() {[m
+             const term = searchInput.value.trim().toLowerCase();[m
+[31m-[m
+             const selectedStatus = statusFilter.value;[m
+             const selectedCategory = categoryFilter.value;[m
+ [m
+[36m@@ -1115,21 +843,17 @@[m
+                     selectedCategory === "All" ||[m
+                     project.category === selectedCategory;[m
+ [m
+[31m-                return matchesSearch &&[m
+[31m-                    matchesStatus &&[m
+[31m-                    matchesCategory;[m
+[32m+[m[32m                return matchesSearch && matchesStatus && matchesCategory;[m
+             });[m
+         }[m
+ [m
+[31m-        /* Display project cards */[m
+[31m-[m
+[32m+[m[32m        // Display project cards.[m
+         function renderProjects() {[m
+             updateStatistics();[m
+ [m
+             const filteredProjects = getFilteredProjects();[m
+ [m
+             projectList.replaceChildren();[m
+[31m-[m
+             emptyState.classList.add("hidden");[m
+             noResults.classList.add("hidden");[m
+ [m
+[36m@@ -1145,7 +869,6 @@[m
+ [m
+             filteredProjects.forEach(project => {[m
+                 const card = document.createElement("article");[m
+[31m-[m
+                 card.className = "project-card";[m
+ [m
+                 let statusClass = "status-not-started";[m
+[36m@@ -1159,12 +882,12 @@[m
+                 card.innerHTML = `[m
+                     <h3>📘 ${escapeHTML(project.name)}</h3>[m
+ [m
+[31m-                    <p class="project-description">[m
+[31m-                        ${escapeHTML([m
+[32m+[m[32m                    <p class="project-description">${[m
+[32m+[m[32m                        escapeHTML([m
+                             project.description ||[m
+                             "A new project ready to begin."[m
+[31m-                        )}[m
+[31m-                    </p>[m
+[32m+[m[32m                        )[m
+[32m+[m[32m                    }</p>[m
+ [m
+                     <div class="badges">[m
+                         <span class="badge ${statusClass}">[m
+[36m@@ -1182,19 +905,15 @@[m
+                         </span>[m
+ [m
+                         <div class="project-actions">[m
+[31m-                            <button[m
+[31m-                                type="button"[m
+[32m+[m[32m                            <button type="button"[m
+                                 class="btn btn-edit"[m
+[31m-                                data-action="edit"[m
+[31m-                            >[m
+[32m+[m[32m                                data-action="edit">[m
+                                 ✏️ Edit[m
+                             </button>[m
+ [m
+[31m-                            <button[m
+[31m-                                type="button"[m
+[32m+[m[32m                            <button type="button"[m
+                                 class="btn btn-delete"[m
+[31m-                                data-action="delete"[m
+[31m-                            >[m
+[32m+[m[32m                                data-action="delete">[m
+                                 🗑️ Delete[m
+                             </button>[m
+                         </div>[m
+[36m@@ -1215,14 +934,12 @@[m
+             });[m
+         }[m
+ [m
+[31m-        /* Search and filter events */[m
+[31m-[m
+[32m+[m[32m        // Update the page immediately when searching or filtering.[m
+         searchInput.addEventListener("input", renderProjects);[m
+         statusFilter.addEventListener("change", renderProjects);[m
+         categoryFilter.addEventListener("change", renderProjects);[m
+ [m
+[31m-        /* Start the application */[m
+[31m-[m
+[32m+[m[32m        // Start the application.[m
+         loadProjects();[m
+     </script>[m
+ [m
+[1mdiff --git a/public/script.js b/public/script.js[m
+[1mindex 7754412..09e8740 100644[m
+[1m--- a/public/script.js[m
+[1m+++ b/public/script.js[m
+[36m@@ -1,60 +1,488 @@[m
+[32m+[m[32m"use strict";[m
+[32m+[m
+[32m+[m[32mconst STORAGE_KEY = "workshop-projects-v1";[m
+[32m+[m
+ const projectForm = document.getElementById("projectForm");[m
+[31m-const nameInput = document.getElementById("projectName");[m
+[31m-const statusInput = document.getElementById("status");[m
+[32m+[m[32mconst projectName = document.getElementById("projectName");[m
+[32m+[m[32mconst projectCategory = document.getElementById("projectCategory");[m
+[32m+[m[32mconst projectStatus = document.getElementById("projectStatus");[m
+[32m+[m[32mconst projectDate = document.getElementById("projectDate");[m
+[32m+[m[32mconst projectDescription = document.getElementById("projectDescription");[m
+[32m+[m
+ const projectList = document.getElementById("projectList");[m
+[32m+[m[32mconst searchInput = document.getElementById("searchInput");[m
+[32m+[m[32mconst statusFilter = document.getElementById("statusFilter");[m
+[32m+[m[32mconst categoryFilter = document.getElementById("categoryFilter");[m
+ [m
+[31m-const projects = [];[m
+[32m+[m[32mconst totalCount = document.getElementById("totalCount");[m
+[32m+[m[32mconst progressCount = document.getElementById("progressCount");[m
+[32m+[m[32mconst completedCount = document.getElementById("completedCount");[m
+ [m
+[31m-function renderProjects() {[m
+[31m-    projectList.innerHTML = "";[m
+[32m+[m[32mconst emptyState = document.getElementById("emptyState");[m
+[32m+[m[32mconst noResults = document.getElementById("noResults");[m
+ [m
+[31m-    if (projects.length === 0) {[m
+[31m-        const emptyMessage = document.createElement("p");[m
+[31m-        emptyMessage.className = "empty-message";[m
+[31m-        emptyMessage.textContent = "No projects added yet.";[m
+[31m-        projectList.appendChild(emptyMessage);[m
+[31m-        return;[m
+[32m+[m[32mconst formTitle = document.getElementById("formTitle");[m
+[32m+[m[32mconst submitButton = document.getElementById("submitButton");[m
+[32m+[m[32mconst cancelEditButton = document.getElementById("cancelEditButton");[m
+[32m+[m[32mconst clearButton = document.getElementById("clearButton");[m
+[32m+[m
+[32m+[m[32mlet projects = [];[m
+[32m+[m[32mlet editingProjectId = null;[m
+[32m+[m[32mlet storageReady = false;[m
+[32m+[m
+[32m+[m[32m// Load saved projects when the page opens.[m
+[32m+[m[32mfunction loadProjects() {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m        const saved = localStorage.getItem(STORAGE_KEY);[m
+[32m+[m
+[32m+[m[32m        if (saved === null) {[m
+[32m+[m[32m            projects = [];[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            const parsed = JSON.parse(saved);[m
+[32m+[m
+[32m+[m[32m            if ([m
+[32m+[m[32m                !Array.isArray(parsed) ||[m
+[32m+[m[32m                !parsed.every(project =>[m
+[32m+[m[32m                    project &&[m
+[32m+[m[32m                    typeof project === "object" &&[m
+[32m+[m[32m                    !Array.isArray(project) &&[m
+[32m+[m[32m                    typeof project.id === "string" &&[m
+[32m+[m[32m                    typeof project.name === "string" &&[m
+[32m+[m[32m                    typeof project.category === "string" &&[m
+[32m+[m[32m                    typeof project.status === "string"[m
+[32m+[m[32m                )[m
+[32m+[m[32m            ) {[m
+[32m+[m[32m                throw new Error("Saved project data is not a valid project array.");[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m            projects = parsed.map(project => ({[m
+[32m+[m[32m                ...project,[m
+[32m+[m[32m                date: String(project.date ?? ""),[m
+[32m+[m[32m                description: String(project.description ?? "")[m
+[32m+[m[32m            }));[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        storageReady = true;[m
+[32m+[m[32m        renderProjects();[m
+[32m+[m[32m    } catch (error) {[m
+[32m+[m[32m        storageReady = false;[m
+[32m+[m[32m        projects = [];[m
+[32m+[m
+[32m+[m[32m        console.error("Could not load saved projects:", error);[m
+[32m+[m
+[32m+[m[32m        projectList.replaceChildren();[m
+[32m+[m
+[32m+[m[32m        const message = document.createElement("p");[m
+[32m+[m[32m        message.className = "empty-state";[m
+[32m+[m[32m        message.textContent =[m
+[32m+[m[32m            "Saved projects could not be loaded. Your saved data has not been overwritten. Check the browser console or ask your instructor for help.";[m
+[32m+[m
+[32m+[m[32m        projectList.appendChild(message);[m
+[32m+[m
+[32m+[m[32m        updateStatistics();[m
+[32m+[m
+[32m+[m[32m        alert([m
+[32m+[m[32m            "Saved projects could not be loaded. " +[m
+[32m+[m[32m            "The stored data has not been changed. " +[m
+[32m+[m[32m            "Please ask your instructor for help before continuing."[m
+[32m+[m[32m        );[m
+     }[m
+[32m+[m[32m}[m
+ [m
+[31m-    projects.forEach(function (project) {[m
+[31m-        const listItem = document.createElement("article");[m
+[31m-        listItem.className = "project-card";[m
+[32m+[m[32m// Save the current collection in browser storage.[m
+[32m+[m[32mfunction saveProjects() {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m        localStorage.setItem([m
+[32m+[m[32m            STORAGE_KEY,[m
+[32m+[m[32m            JSON.stringify(projects)[m
+[32m+[m[32m        );[m
+ [m
+[31m-        const projectTitle = document.createElement("h3");[m
+[31m-        projectTitle.textContent = project.name;[m
+[32m+[m[32m        return true;[m
+[32m+[m[32m    } catch (error) {[m
+[32m+[m[32m        console.error("Could not save projects:", error);[m
+ [m
+[31m-        const projectStatus = document.createElement("p");[m
+[31m-        projectStatus.textContent = "Status: " + project.status;[m
+[32m+[m[32m        alert([m
+[32m+[m[32m            "Changes could not be saved in this browser. " +[m
+[32m+[m[32m            "Please check browser storage and try again."[m
+[32m+[m[32m        );[m
+ [m
+[31m-        listItem.appendChild(projectTitle);[m
+[31m-        listItem.appendChild(projectStatus);[m
+[32m+[m[32m        return false;[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+ [m
+[31m-        projectList.appendChild(listItem);[m
+[31m-    });[m
+[32m+[m[32m// Generate a unique project ID.[m
+[32m+[m[32mfunction createProjectId() {[m
+[32m+[m[32m    return window.crypto &&[m
+[32m+[m[32m        typeof window.crypto.randomUUID === "function"[m
+[32m+[m[32m        ? window.crypto.randomUUID()[m
+[32m+[m[32m        : Date.now().toString(36) +[m
+[32m+[m[32m          Math.random().toString(36).slice(2);[m
+ }[m
+ [m
+[31m-projectForm.addEventListener("submit", function (event) {[m
+[32m+[m[32m// Add a project or save changes to an existing project.[m
+[32m+[m[32mprojectForm.addEventListener("submit", function(event) {[m
+     event.preventDefault();[m
+ [m
+[31m-    const projectName = nameInput.value.trim();[m
+[31m-    const projectStatus = statusInput.value;[m
+[32m+[m[32m    if (!storageReady) {[m
+[32m+[m[32m        alert([m
+[32m+[m[32m            "Projects cannot be changed until saved data " +[m
+[32m+[m[32m            "has been loaded successfully."[m
+[32m+[m[32m        );[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+ [m
+[31m-    if (projectName === "") {[m
+[32m+[m[32m    const name = projectName.value.trim();[m
+[32m+[m
+[32m+[m[32m    if (!name) {[m
+         alert("Please enter a project name.");[m
+[32m+[m[32m        projectName.focus();[m
+         return;[m
+     }[m
+ [m
+[31m-    const project = {[m
+[31m-        id: crypto.randomUUID(),[m
+[31m-        name: projectName,[m
+[31m-        status: projectStatus[m
+[32m+[m[32m    const projectData = {[m
+[32m+[m[32m        name: name,[m
+[32m+[m[32m        category: projectCategory.value,[m
+[32m+[m[32m        status: projectStatus.value,[m
+[32m+[m[32m        date: projectDate.value,[m
+[32m+[m[32m        description: projectDescription.value.trim()[m
+     };[m
+ [m
+[31m-    projects.push(project);[m
+[32m+[m[32m    if (editingProjectId !== null) {[m
+[32m+[m[32m        const project = projects.find([m
+[32m+[m[32m            item => item.id === editingProjectId[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        if (!project) {[m
+[32m+[m[32m            alert("Project not found. Please try again.");[m
+[32m+[m[32m            resetForm();[m
+[32m+[m[32m            return;[m
+[32m+[m[32m        }[m
+ [m
+[32m+[m[32m        const updatedProjects = projects.map(item =>[m
+[32m+[m[32m            item.id === editingProjectId[m
+[32m+[m[32m                ? { ...item, ...projectData }[m
+[32m+[m[32m                : item[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        if (!saveProjectsCollection(updatedProjects)) {[m
+[32m+[m[32m            return;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        projects = updatedProjects;[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m        const newProject = {[m
+[32m+[m[32m            id: createProjectId(),[m
+[32m+[m[32m            ...projectData[m
+[32m+[m[32m        };[m
+[32m+[m
+[32m+[m[32m        const updatedProjects = [...projects, newProject];[m
+[32m+[m
+[32m+[m[32m        if (!saveProjectsCollection(updatedProjects)) {[m
+[32m+[m[32m            return;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        projects = updatedProjects;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    resetForm();[m
+     renderProjects();[m
+[32m+[m[32m});[m
+ [m
+[32m+[m[32m// Save a proposed collection before updating the displayed collection.[m
+[32m+[m[32mfunction saveProjectsCollection(updatedProjects) {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m        localStorage.setItem([m
+[32m+[m[32m            STORAGE_KEY,[m
+[32m+[m[32m            JSON.stringify(updatedProjects)[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        return true;[m
+[32m+[m[32m    } catch (error) {[m
+[32m+[m[32m        console.error("Could not save projects:", error);[m
+[32m+[m
+[32m+[m[32m        alert([m
+[32m+[m[32m            "Changes could not be saved in this browser. " +[m
+[32m+[m[32m            "Your previous saved records have been kept."[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        return false;[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Return the form to Add mode.[m
+[32m+[m[32mfunction resetForm() {[m
+     projectForm.reset();[m
+[32m+[m[32m    editingProjectId = null;[m
+[32m+[m
+[32m+[m[32m    formTitle.textContent = "Add a Project";[m
+[32m+[m[32m    submitButton.textContent = "➕ Add Project";[m
+[32m+[m[32m    cancelEditButton.classList.add("hidden");[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mcancelEditButton.addEventListener("click", resetForm);[m
+[32m+[m
+[32m+[m[32mclearButton.addEventListener("click", function() {[m
+[32m+[m[32m    editingProjectId = null;[m
+[32m+[m[32m    formTitle.textContent = "Add a Project";[m
+[32m+[m[32m    submitButton.textContent = "➕ Add Project";[m
+[32m+[m[32m    cancelEditButton.classList.add("hidden");[m
+ });[m
+ [m
+[31m-renderProjects();[m
+\ No newline at end of file[m
+[32m+[m[32m// Edit a project.[m
+[32m+[m[32mfunction editProject(id) {[m
+[32m+[m[32m    const project = projects.find(item => item.id === id);[m
+[32m+[m
+[32m+[m[32m    if (!project) {[m
+[32m+[m[32m        alert("Project not found.");[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    editingProjectId = id;[m
+[32m+[m
+[32m+[m[32m    projectName.value = project.name;[m
+[32m+[m[32m    projectCategory.value = project.category;[m
+[32m+[m[32m    projectStatus.value = project.status;[m
+[32m+[m[32m    projectDate.value = project.date;[m
+[32m+[m[32m    projectDescription.value = project.description;[m
+[32m+[m
+[32m+[m[32m    formTitle.textContent = "Edit Project";[m
+[32m+[m[32m    submitButton.textContent = "💾 Save Changes";[m
+[32m+[m[32m    cancelEditButton.classList.remove("hidden");[m
+[32m+[m
+[32m+[m[32m    document.getElementById("formPanel").scrollIntoView({[m
+[32m+[m[32m        behavior: "smooth",[m
+[32m+[m[32m        block: "start"[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m[32m    projectName.focus();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Delete a project after confirmation.[m
+[32m+[m[32mfunction deleteProject(id) {[m
+[32m+[m[32m    if (!storageReady) {[m
+[32m+[m[32m        alert("Saved projects could not be loaded. Deletion is disabled.");[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const project = projects.find(item => item.id === id);[m
+[32m+[m
+[32m+[m[32m    if (!project) {[m
+[32m+[m[32m        alert("Project not found.");[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const confirmed = window.confirm([m
+[32m+[m[32m        'Are you sure you want to delete "' + project.name + '"?'[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (!confirmed) {[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const updatedProjects = projects.filter([m
+[32m+[m[32m        item => item.id !== id[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (!saveProjectsCollection(updatedProjects)) {[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    projects = updatedProjects;[m
+[32m+[m
+[32m+[m[32m    if (editingProjectId === id) {[m
+[32m+[m[32m        resetForm();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    renderProjects();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Format a date.[m
+[32m+[m[32mfunction formatDate(value) {[m
+[32m+[m[32m    if (!value) {[m
+[32m+[m[32m        return "No target date";[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const parts = value.split("-");[m
+[32m+[m
+[32m+[m[32m    if (parts.length !== 3) {[m
+[32m+[m[32m        return "No target date";[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    return parts[2] + "/" + parts[1] + "/" + parts[0];[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Update the statistics.[m
+[32m+[m[32mfunction updateStatistics() {[m
+[32m+[m[32m    totalCount.textContent = projects.length;[m
+[32m+[m
+[32m+[m[32m    progressCount.textContent = projects.filter([m
+[32m+[m[32m        project => project.status === "In Progress"[m
+[32m+[m[32m    ).length;[m
+[32m+[m
+[32m+[m[32m    completedCount.textContent = projects.filter([m
+[32m+[m[32m        project => project.status === "Completed"[m
+[32m+[m[32m    ).length;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Search and filter projects.[m
+[32m+[m[32mfunction getFilteredProjects() {[m
+[32m+[m[32m    const term = searchInput.value.trim().toLowerCase();[m
+[32m+[m[32m    const selectedStatus = statusFilter.value;[m
+[32m+[m[32m    const selectedCategory = categoryFilter.value;[m
+[32m+[m
+[32m+[m[32m    return projects.filter(project => {[m
+[32m+[m[32m        const searchableText = [[m
+[32m+[m[32m            project.name,[m
+[32m+[m[32m            project.category,[m
+[32m+[m[32m            project.status,[m
+[32m+[m[32m            project.description[m
+[32m+[m[32m        ].join(" ").toLowerCase();[m
+[32m+[m
+[32m+[m[32m        const matchesSearch = searchableText.includes(term);[m
+[32m+[m
+[32m+[m[32m        const matchesStatus =[m
+[32m+[m[32m            selectedStatus === "All" ||[m
+[32m+[m[32m            selectedStatus === "" ||[m
+[32m+[m[32m            project.status === selectedStatus;[m
+[32m+[m
+[32m+[m[32m        const matchesCategory =[m
+[32m+[m[32m            selectedCategory === "All" ||[m
+[32m+[m[32m            selectedCategory === "" ||[m
+[32m+[m[32m            project.category === selectedCategory;[m
+[32m+[m
+[32m+[m[32m        return matchesSearch && matchesStatus && matchesCategory;[m
+[32m+[m[32m    });[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Create elements safely using textContent.[m
+[32m+[m[32mfunction createTextElement(tagName, text, className) {[m
+[32m+[m[32m    const element = document.createElement(tagName);[m
+[32m+[m[32m    element.textContent = text;[m
+[32m+[m
+[32m+[m[32m    if (className) {[m
+[32m+[m[32m        element.className = className;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    return element;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Display project cards.[m
+[32m+[m[32mfunction renderProjects() {[m
+[32m+[m[32m    updateStatistics();[m
+[32m+[m
+[32m+[m[32m    const filteredProjects = getFilteredProjects();[m
+[32m+[m
+[32m+[m[32m    projectList.replaceChildren();[m
+[32m+[m
+[32m+[m[32m    emptyState.classList.add("hidden");[m
+[32m+[m[32m    noResults.classList.add("hidden");[m
+[32m+[m
+[32m+[m[32m    if (projects.length === 0) {[m
+[32m+[m[32m        emptyState.classList.remove("hidden");[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    if (filteredProjects.length === 0) {[m
+[32m+[m[32m        noResults.classList.remove("hidden");[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    filteredProjects.forEach(function(project) {[m
+[32m+[m[32m        const card = document.createElement("article");[m
+[32m+[m[32m        card.className = "project-card";[m
+[32m+[m
+[32m+[m[32m        let statusClass = "status-not-started";[m
+[32m+[m
+[32m+[m[32m        if (project.status === "In Progress") {[m
+[32m+[m[32m            statusClass = "status-in-progress";[m
+[32m+[m[32m        } else if (project.status === "Completed") {[m
+[32m+[m[32m            statusClass = "status-completed";[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        card.appendChild([m
+[32m+[m[32m            createTextElement("h3", "📘 " + project.name)[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        card.appendChild([m
+[32m+[m[32m            createTextElement([m
+[32m+[m[32m                "p",[m
+[32m+[m[32m                project.description || "A new project ready to begin.",[m
+[32m+[m[32m                "project-description"[m
+[32m+[m[32m            )[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        const badges = document.createElement("div");[m
+[32m+[m[32m        badges.className = "badges";[m
+[32m+[m
+[32m+[m[32m        badges.appendChild([m
+[32m+[m[32m            createTextElement([m
+[32m+[m[32m                "span",[m
+[32m+[m[32m                project.status,[m
+[32m+[m[32m                "badge " + statusClass[m
+[32m+[m[32m            )[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        badges.appendChild([m
+[32m+[m[32m            createTextElement([m
+[32m+[m[32m                "span",[m
+[32m+[m[32m                project.category,[m
+[32m+[m[32m                "badge category-badge"[m
+[32m+[m[32m            )[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        card.appendChild(badges);[m
+[32m+[m
+[32m+[m[32m        const footer = document.createElement("div");[m
+[32m+[m[32m        footer.className = "project-footer";[m
+[32m+[m
+[32m+[m[32m        footer.appendChild([m
+[32m+[m[32m            createTextElement([m
+[32m+[m[32m                "span",[m
+[32m+[m[32m                "📅 " + formatDate(project.date),[m
+[32m+[m[32m                "project-date"[m
+[32m+[m[32m            )[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        const actions = document.createElement("div");[m
+[32m+[m[32m        actions.className = "project-actions";[m
+[32m+[m
+[32m+[m[32m        const editButton = createTextElement([m
+[32m+[m[32m            "button",[m
+[32m+[m[32m            "✏️ Edit",[m
+[32m+[m[32m            "btn btn-edit"[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        editButton.type = "button";[m
+[32m+[m
+[32m+[m[32m        editButton.addEventListener("click", function() {[m
+[32m+[m[32m            editProject(project.id);[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        const deleteButton = createTextElement([m
+[32m+[m[32m            "button",[m
+[32m+[m[32m            "🗑️ Delete",[m
+[32m+[m[32m            "btn btn-delete"[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        deleteButton.type = "button";[m
+[32m+[m
+[32m+[m[32m        deleteButton.addEventListener("click", function() {[m
+[32m+[m[32m            deleteProject(project.id);[m
+[32m+[m[32m        });[m
+[32m+[m
+[32m+[m[32m        actions.appendChild(editButton);[m
+[32m+[m[32m        actions.appendChild(deleteButton);[m
+[32m+[m
+[32m+[m[32m        footer.appendChild(actions);[m
+[32m+[m[32m        card.appendChild(footer);[m
+[32m+[m[32m        projectList.appendChild(card);[m
+[32m+[m[32m    });[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// Update the display when searching or filtering.[m
+[32m+[m[32msearchInput.addEventListener("input", renderProjects);[m
+[32m+[m[32mstatusFilter.addEventListener("change", renderProjects);[m
+[32m+[m[32mcategoryFilter.addEventListener("change", renderProjects);[m
+[32m+[m
+[32m+[m[32m// Start the application.[m
+[32m+[m[32mloadProjects();[m
+\ No newline at end of file[m

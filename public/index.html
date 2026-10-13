@@ -3,19 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Student Project Tracker</title>
 
     <style>
-        :root {
-            --deep-blue: #021b38;
-            --ocean-blue: #075985;
-            --aqua: #67e8f9;
-            --mint: #a7f3d0;
-            --white: #ffffff;
-            --dark-text: #16364a;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -25,40 +15,21 @@
         body {
             min-height: 100vh;
             font-family: "Segoe UI", Arial, sans-serif;
-            color: #ffffff;
-
+            color: white;
             background:
-                radial-gradient(
-                    circle at 15% 10%,
-                    rgba(103, 232, 249, 0.22),
-                    transparent 32%
-                ),
-                radial-gradient(
-                    circle at 85% 80%,
-                    rgba(167, 243, 208, 0.15),
-                    transparent 30%
-                ),
-                linear-gradient(
-                    135deg,
-                    #021b38,
-                    #064e75,
-                    #087e8b
-                );
-
+                radial-gradient(circle at 15% 10%, rgba(103,232,249,.22), transparent 32%),
+                radial-gradient(circle at 85% 80%, rgba(167,243,208,.15), transparent 30%),
+                linear-gradient(135deg, #021b38, #064e75, #087e8b);
             overflow-x: hidden;
         }
 
-        button,
-        input,
-        select {
+        button, input, select, textarea {
             font: inherit;
         }
 
         button {
             cursor: pointer;
         }
-
-        /* Animated underwater background */
 
         .ocean-background {
             position: fixed;
@@ -70,118 +41,70 @@
 
         .bubble {
             position: absolute;
-            bottom: -80px;
+            bottom: -50px;
+            left: 15%;
             width: 18px;
             height: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255,255,255,.5);
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
             animation: floatUp 12s linear infinite;
         }
 
         .bubble:nth-child(2) {
-            left: 12%;
-            width: 12px;
-            height: 12px;
+            left: 35%;
             animation-delay: 2s;
         }
 
         .bubble:nth-child(3) {
-            left: 28%;
-            width: 25px;
-            height: 25px;
-            animation-duration: 15s;
-        }
-
-        .bubble:nth-child(4) {
-            left: 47%;
-            animation-delay: 3s;
-        }
-
-        .bubble:nth-child(5) {
-            left: 65%;
-            width: 14px;
-            height: 14px;
-            animation-duration: 10s;
-        }
-
-        .bubble:nth-child(6) {
-            left: 82%;
+            left: 55%;
             animation-delay: 4s;
         }
 
-        .bubble:nth-child(7) {
-            left: 94%;
-            width: 24px;
-            height: 24px;
-            animation-duration: 14s;
+        .bubble:nth-child(4) {
+            left: 75%;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(5) {
+            left: 90%;
+            animation-delay: 6s;
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-
-            15% {
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: translateY(-120vh) translateX(30px);
+            to {
+                transform: translateY(-120vh);
                 opacity: 0;
             }
         }
-
-        /* Floating sea creatures */
 
         .sea-creature {
             position: fixed;
             z-index: 1;
-            font-size: 40px;
+            font-size: 36px;
             pointer-events: none;
             animation: swim 5s ease-in-out infinite;
         }
 
         .turtle {
-            top: 120px;
+            top: 22%;
             left: 2%;
         }
 
         .jellyfish {
-            top: 200px;
-            right: 3%;
-            animation-delay: 1s;
-        }
-
-        .fish {
-            bottom: 100px;
-            left: 3%;
-            animation-delay: 2s;
-        }
-
-        .octopus {
-            bottom: 65px;
-            right: 3%;
-            animation-delay: 1.5s;
+            top: 30%;
+            right: 2%;
         }
 
         @keyframes swim {
-            0%, 100% {
-                transform: translateY(0) rotate(-4deg);
-            }
-
             50% {
-                transform: translateY(-16px) rotate(4deg);
+                transform: translateY(-15px);
             }
         }
-
-        /* Main page */
 
         .container {
             width: min(1080px, 92%);
             margin: auto;
-            padding: 35px 0 25px;
+            padding: 35px 0;
             position: relative;
             z-index: 2;
         }
@@ -195,9 +118,9 @@
             display: inline-block;
             padding: 8px 16px;
             margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255,255,255,.3);
             border-radius: 30px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,.1);
             color: #a5f3fc;
             font-size: 12px;
             font-weight: 800;
@@ -205,18 +128,15 @@
         }
 
         h1 {
-            color: #ffffff;
-            font-size: clamp(32px, 5vw, 50px);
+            font-size: clamp(30px, 5vw, 50px);
             font-weight: 850;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .subtitle {
-            max-width: 600px;
+            max-width: 650px;
             margin: 12px auto;
             color: #e0faff;
             line-height: 1.7;
-            font-size: 15px;
         }
 
         .decorations {
@@ -225,8 +145,6 @@
             letter-spacing: 8px;
         }
 
-        /* Statistics */
-
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -234,23 +152,25 @@
             margin-bottom: 22px;
         }
 
-        .stat-card {
-            padding: 20px 10px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.23);
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.12);
+        .stat-card, .panel {
+            border: 1px solid rgba(255,255,255,.23);
+            border-radius: 22px;
+            background: rgba(255,255,255,.12);
             backdrop-filter: blur(12px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 25px rgba(0,0,0,.12);
+        }
+
+        .stat-card {
+            padding: 22px 10px;
+            text-align: center;
         }
 
         .stat-icon {
-            font-size: 26px;
+            font-size: 27px;
         }
 
         .stat-number {
             margin: 5px 0;
-            color: #ffffff;
             font-size: 30px;
             font-weight: 850;
         }
@@ -260,16 +180,9 @@
             font-size: 13px;
         }
 
-        /* Content panels */
-
         .panel {
             padding: 27px;
             margin-bottom: 23px;
-            border: 1px solid rgba(255, 255, 255, 0.24);
-            border-radius: 23px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
         }
 
         .section-heading {
@@ -284,15 +197,9 @@
             place-items: center;
             width: 46px;
             height: 46px;
-            border: 1px solid rgba(103, 232, 249, 0.35);
             border-radius: 14px;
-            background: rgba(103, 232, 249, 0.16);
+            background: rgba(103,232,249,.16);
             font-size: 24px;
-        }
-
-        .section-heading h2 {
-            color: #ffffff;
-            font-size: 21px;
         }
 
         .section-heading p {
@@ -300,8 +207,6 @@
             color: #e0faff;
             font-size: 13px;
         }
-
-        /* Form */
 
         .form-grid {
             display: grid;
@@ -320,13 +225,11 @@
         }
 
         label {
-            color: #ffffff;
             font-size: 14px;
             font-weight: 750;
         }
 
-        input,
-        select {
+        input, select, textarea {
             width: 100%;
             min-height: 46px;
             padding: 12px 14px;
@@ -334,26 +237,17 @@
             border-radius: 12px;
             outline: none;
             color: #16364a;
-            background: #ffffff;
+            background: white;
         }
 
-        input::placeholder {
-            color: #64748b;
-            opacity: 1;
+        textarea {
+            min-height: 100px;
+            resize: vertical;
         }
 
-        select option {
-            color: #16364a;
-            background: #ffffff;
-        }
-
-        input:focus,
-        select:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: #67e8f9;
-            box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.2);
         }
-
-        /* Buttons */
 
         .button-row {
             display: flex;
@@ -363,11 +257,11 @@
         }
 
         .btn {
-            padding: 12px 19px;
+            padding: 11px 16px;
             border: none;
-            border-radius: 12px;
+            border-radius: 11px;
             font-weight: 800;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform .2s;
         }
 
         .btn:hover {
@@ -377,34 +271,27 @@
         .btn-primary {
             color: #063047;
             background: linear-gradient(135deg, #a7f3d0, #67e8f9);
-            box-shadow: 0 5px 17px rgba(103, 232, 249, 0.18);
         }
 
         .btn-secondary {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.3);
         }
 
         .btn-edit {
-            padding: 9px 12px;
             color: #063047;
             background: #b5f4ff;
-            font-size: 12px;
         }
 
         .btn-delete {
-            padding: 9px 12px;
-            color: #ffffff;
+            color: white;
             background: #c83e57;
-            font-size: 12px;
         }
 
         .hidden {
             display: none !important;
         }
-
-        /* Search and filters */
 
         .toolbar {
             display: grid;
@@ -413,8 +300,6 @@
             margin-bottom: 20px;
         }
 
-        /* Project cards */
-
         .project-list {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -422,189 +307,109 @@
         }
 
         .project-card {
-            padding: 21px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,.25);
             border-radius: 18px;
-            color: #16364a;
-            background: #ffffff;
-            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.1);
-            animation: cardAppear 0.3s ease;
-        }
-
-        @keyframes cardAppear {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background: rgba(255,255,255,.11);
+            overflow-wrap: anywhere;
         }
 
         .project-card h3 {
-            margin-bottom: 11px;
-            color: #075985;
-            font-size: 19px;
-            overflow-wrap: anywhere;
+            margin-bottom: 12px;
+            font-size: 20px;
         }
 
         .project-description {
-            margin-bottom: 14px;
-            color: #475569;
-            font-size: 14px;
+            color: #e0faff;
             line-height: 1.6;
-            overflow-wrap: anywhere;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
         }
 
         .badges {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .badge {
-            display: inline-block;
             padding: 6px 10px;
             border-radius: 20px;
-            font-size: 11px;
+            color: #063047;
+            background: #a7f3d0;
+            font-size: 12px;
             font-weight: 800;
         }
 
-        .status-not-started {
-            color: #334155;
-            background: #e2e8f0;
-        }
-
         .status-in-progress {
-            color: #854d0e;
-            background: #fef3c7;
+            background: #fde68a;
         }
 
         .status-completed {
-            color: #166534;
-            background: #dcfce7;
+            background: #86efac;
+        }
+
+        .status-not-started {
+            background: #bfdbfe;
         }
 
         .category-badge {
-            color: #075985;
-            background: #cffafe;
+            background: #ddd6fe;
         }
 
         .project-footer {
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding-top: 13px;
-            border-top: 1px solid #e2e8f0;
+            flex-direction: column;
+            gap: 13px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,.18);
         }
 
         .project-date {
-            color: #64748b;
-            font-size: 12px;
+            color: #e0faff;
+            font-size: 13px;
         }
 
         .project-actions {
             display: flex;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 9px;
         }
-
-        /* Empty messages */
 
         .empty-state {
-            padding: 40px 20px;
-            border: 1px dashed rgba(255, 255, 255, 0.4);
-            border-radius: 17px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 35px 10px;
             text-align: center;
-        }
-
-        .empty-icon {
-            margin-bottom: 12px;
-            font-size: 46px;
-        }
-
-        .empty-state h3 {
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .empty-state p {
             color: #e0faff;
-            font-size: 14px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         footer {
-            padding: 15px 0;
-            color: #e0faff;
-            font-size: 13px;
-            line-height: 1.8;
             text-align: center;
+            color: #d7f5ff;
+            font-size: 13px;
+            padding: 10px;
         }
-
-        footer .footer-icons {
-            margin-bottom: 8px;
-            font-size: 23px;
-        }
-
-        /* Mobile-friendly layout */
 
         @media (max-width: 700px) {
-            .container {
-                width: 94%;
-                padding-top: 25px;
-            }
-
             .stats {
-                gap: 8px;
+                grid-template-columns: 1fr;
             }
 
-            .stat-card {
-                padding: 15px 5px;
-            }
-
-            .stat-number {
-                font-size: 24px;
-            }
-
-            .stat-label {
-                font-size: 11px;
+            .form-grid, .project-list, .toolbar {
+                grid-template-columns: 1fr;
             }
 
             .panel {
-                padding: 19px;
+                padding: 18px;
             }
 
-            .form-grid,
-            .project-list {
-                grid-template-columns: 1fr;
-            }
-
-            .toolbar {
-                grid-template-columns: 1fr;
+            .full-width {
+                grid-column: auto;
             }
 
             .sea-creature {
-                font-size: 29px;
-                opacity: 0.55;
-            }
-
-            .section-heading h2 {
-                font-size: 18px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
+                font-size: 25px;
             }
         }
     </style>
@@ -612,10 +417,7 @@
 
 <body>
 
-    <!-- Ocean background -->
     <div class="ocean-background" aria-hidden="true">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
         <div class="bubble"></div>
         <div class="bubble"></div>
         <div class="bubble"></div>
@@ -623,33 +425,22 @@
         <div class="bubble"></div>
     </div>
 
-    <!-- Sea creatures -->
     <div class="sea-creature turtle" aria-hidden="true">🐢</div>
     <div class="sea-creature jellyfish" aria-hidden="true">🪼</div>
-    <div class="sea-creature fish" aria-hidden="true">🐠</div>
-    <div class="sea-creature octopus" aria-hidden="true">🐙</div>
 
     <main class="container">
 
-        <!-- Page header -->
         <header>
-            <div class="eyebrow">🎓 ORGANIZE • LEARN • ACHIEVE</div>
-
+            <span class="eyebrow">🎓 ORGANIZE • LEARN • ACHIEVE</span>
             <h1>Student Project Tracker</h1>
-
             <p class="subtitle">
-                Track your ideas, organize your projects, and celebrate
-                every achievement. Your learning journey starts here!
+                Track your ideas, organize your projects, and celebrate every
+                achievement. Your learning journey starts here!
             </p>
-
-            <div class="decorations" aria-hidden="true">
-                🐚 🪸 🫧
-            </div>
+            <div class="decorations">🐚 🪸 🫧</div>
         </header>
 
-        <!-- Project statistics -->
-        <section class="stats" aria-label="Project statistics">
-
+        <section class="stats">
             <div class="stat-card">
                 <div class="stat-icon">📚</div>
                 <div class="stat-number" id="totalCount">0</div>
@@ -667,15 +458,11 @@
                 <div class="stat-number" id="completedCount">0</div>
                 <div class="stat-label">Completed</div>
             </div>
-
         </section>
 
-        <!-- Add or edit project -->
-        <section class="panel">
-
+        <section class="panel" id="formPanel">
             <div class="section-heading">
                 <div class="section-icon">📝</div>
-
                 <div>
                     <h2 id="formTitle">Add a Project</h2>
                     <p>Enter your project details below.</p>
@@ -683,38 +470,30 @@
             </div>
 
             <form id="projectForm">
-
                 <div class="form-grid">
 
                     <div class="form-group">
                         <label for="projectName">Project Name *</label>
-
-                        <input
-                            type="text"
-                            id="projectName"
-                            placeholder="e.g. IoT Monitor"
-                            maxlength="100"
-                            required
-                        >
+                        <input id="projectName" type="text"
+                               placeholder="e.g. IoT Monitor" required>
                     </div>
 
                     <div class="form-group">
                         <label for="projectCategory">Category *</label>
-
                         <select id="projectCategory" required>
                             <option value="">Choose a category</option>
-                            <option value="Web Development">Web Development</option>
                             <option value="Electronics">Electronics</option>
                             <option value="IoT">IoT</option>
                             <option value="Robotics">Robotics</option>
-                            <option value="Research">Research</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Mechanical">Mechanical</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="projectStatus">Project Status *</label>
-
                         <select id="projectStatus" required>
                             <option value="Planned">Planned</option>
                             <option value="In Progress">In Progress</option>
@@ -724,67 +503,46 @@
 
                     <div class="form-group">
                         <label for="projectDate">Target Date</label>
-
-                        <input type="date" id="projectDate">
+                        <input id="projectDate" type="date">
                     </div>
 
                     <div class="form-group full-width">
                         <label for="projectDescription">Description</label>
-
-                        <input
-                            type="text"
-                            id="projectDescription"
-                            placeholder="What is your project about?"
-                            maxlength="250"
-                        >
+                        <textarea id="projectDescription"
+                            placeholder="Describe your project..."></textarea>
                     </div>
 
                 </div>
 
                 <div class="button-row">
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="submitButton"
-                    >
+                    <button type="submit" class="btn btn-primary" id="submitButton">
                         ➕ Add Project
                     </button>
 
-                    <button
-                        type="button"
-                        class="btn btn-secondary hidden"
-                        id="cancelEditButton"
-                    >
-                        ✖ Cancel Edit
+                    <button type="button" class="btn btn-secondary hidden"
+                            id="cancelEditButton">
+                        Cancel Edit
                     </button>
 
+                    <button type="reset" class="btn btn-secondary" id="clearButton">
+                        Clear Form
+                    </button>
                 </div>
-
             </form>
         </section>
 
-        <!-- Project list -->
         <section class="panel">
-
             <div class="section-heading">
-                <div class="section-icon">📂</div>
-
+                <div class="section-icon">🔎</div>
                 <div>
-                    <h2>Your Project List</h2>
-                    <p>View, search, update, and organize your work.</p>
+                    <h2>Your Projects</h2>
+                    <p>Search, filter, edit, or delete your projects.</p>
                 </div>
             </div>
 
-            <!-- Search and filters -->
             <div class="toolbar">
-
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="🔎 Search projects..."
-                    aria-label="Search projects"
-                >
+                <input id="searchInput" type="search"
+                       placeholder="🔍 Search projects...">
 
                 <select id="statusFilter" aria-label="Filter by status">
                     <option value="All">All Statuses</option>
@@ -795,42 +553,33 @@
 
                 <select id="categoryFilter" aria-label="Filter by category">
                     <option value="All">All Categories</option>
-                    <option value="Web Development">Web Development</option>
                     <option value="Electronics">Electronics</option>
                     <option value="IoT">IoT</option>
                     <option value="Robotics">Robotics</option>
-                    <option value="Research">Research</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Mechanical">Mechanical</option>
                     <option value="Other">Other</option>
                 </select>
-
             </div>
 
             <div id="projectList" class="project-list"></div>
 
             <div id="emptyState" class="empty-state">
-                <div class="empty-icon">📘</div>
+                <div style="font-size:45px;">🐠</div>
                 <h3>No projects yet!</h3>
                 <p>Add your first project using the form above.</p>
             </div>
 
             <div id="noResults" class="empty-state hidden">
-                <div class="empty-icon">🔍</div>
-                <h3>No projects found</h3>
+                <div style="font-size:40px;">🔍</div>
+                <h3>No matching projects found</h3>
                 <p>Try another search term or change your filters.</p>
             </div>
-
         </section>
 
         <footer>
-            <div class="footer-icons" aria-hidden="true">
-                📚 💻 ⚙️ 🎓
-            </div>
-
-            Made for curious minds and creative students.
-
-            <br>
-
-            Learn something new every day! ✨
+            🌊 Student Project Tracker • Organize your ideas and achieve your goals!
         </footer>
 
     </main>
@@ -838,10 +587,9 @@
     <script>
         "use strict";
 
-        /* Get HTML elements */
+        const STORAGE_KEY = "studentProjectTrackerProjects";
 
         const projectForm = document.getElementById("projectForm");
-
         const projectName = document.getElementById("projectName");
         const projectCategory = document.getElementById("projectCategory");
         const projectStatus = document.getElementById("projectStatus");
@@ -849,9 +597,6 @@
         const projectDescription = document.getElementById("projectDescription");
 
         const projectList = document.getElementById("projectList");
-        const emptyState = document.getElementById("emptyState");
-        const noResults = document.getElementById("noResults");
-
         const searchInput = document.getElementById("searchInput");
         const statusFilter = document.getElementById("statusFilter");
         const categoryFilter = document.getElementById("categoryFilter");
@@ -860,73 +605,78 @@
         const progressCount = document.getElementById("progressCount");
         const completedCount = document.getElementById("completedCount");
 
+        const emptyState = document.getElementById("emptyState");
+        const noResults = document.getElementById("noResults");
+
         const formTitle = document.getElementById("formTitle");
         const submitButton = document.getElementById("submitButton");
         const cancelEditButton = document.getElementById("cancelEditButton");
-
-        const STORAGE_KEY = "studentTrackerProjects";
+        const clearButton = document.getElementById("clearButton");
 
         let projects = [];
         let editingProjectId = null;
 
-        /* Load projects saved in this browser */
-
+        // Load projects saved in the browser.
         function loadProjects() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
+                const parsed = saved ? JSON.parse(saved) : [];
 
-                if (saved) {
-                    const parsed = JSON.parse(saved);
+                projects = Array.isArray(parsed)
+                    ? parsed.filter(p => p && typeof p === "object")
+                    : [];
 
-                    if (Array.isArray(parsed)) {
-                        projects = parsed.map(project => ({
-                            ...project,
-                            category: project.category || "Other",
-                            status: project.status || "Planned",
-                            description: project.description || "",
-                            date: project.date || ""
-                        }));
-                    }
-                }
+                // Give older projects an ID if they don't have one.
+                projects = projects.map((project, index) => ({
+                    ...project,
+                    id: project.id ?? ("old-" + index + "-" + Date.now()),
+                    name: String(project.name ?? "Untitled Project"),
+                    category: String(project.category ?? "Other"),
+                    status: String(project.status ?? "Planned"),
+                    date: String(project.date ?? ""),
+                    description: String(project.description ?? "")
+                }));
+
+                saveProjects();
             } catch (error) {
-                console.error("Unable to load projects:", error);
+                console.error("Could not load projects:", error);
                 projects = [];
             }
 
             renderProjects();
         }
 
-        /* Save projects */
-
+        // Save projects in browser Local Storage.
         function saveProjects() {
             try {
-                localStorage.setItem(
-                    STORAGE_KEY,
-                    JSON.stringify(projects)
-                );
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
             } catch (error) {
-                console.error("Unable to save projects:", error);
-
-                alert("Unable to save projects in this browser.");
+                console.error("Could not save projects:", error);
+                alert("Projects could not be saved in this browser.");
             }
         }
 
-        /* Generate a unique project ID */
-
+        // Create a unique ID.
         function createProjectId() {
-            if (
-                window.crypto &&
+            return window.crypto &&
                 typeof window.crypto.randomUUID === "function"
-            ) {
-                return window.crypto.randomUUID();
-            }
-
-            return Date.now().toString(36) +
-                Math.random().toString(36).slice(2);
+                ? window.crypto.randomUUID()
+                : Date.now().toString(36) +
+                  Math.random().toString(36).slice(2);
         }
 
-        /* Add or update a project */
+        // Escape text before displaying it in HTML.
+        function escapeHTML(value) {
+            return String(value ?? "").replace(/[&<>"']/g, character => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[character]);
+        }
 
+        // Add a project or save changes to an existing project.
         projectForm.addEventListener("submit", function(event) {
             event.preventDefault();
 
@@ -970,59 +720,47 @@
             renderProjects();
         });
 
-        /* Reset form */
-
+        // Reset the form.
         function resetForm() {
             projectForm.reset();
-
             editingProjectId = null;
 
             formTitle.textContent = "Add a Project";
             submitButton.textContent = "➕ Add Project";
-
             cancelEditButton.classList.add("hidden");
         }
 
         cancelEditButton.addEventListener("click", resetForm);
 
-        /* Protect text before adding it to HTML */
+        clearButton.addEventListener("click", function() {
+            editingProjectId = null;
+            formTitle.textContent = "Add a Project";
+            submitButton.textContent = "➕ Add Project";
+            cancelEditButton.classList.add("hidden");
+        });
 
-        function escapeHTML(value) {
-            return String(value ?? "").replace(
-                /[&<>"']/g,
-                character => ({
-                    "&": "&amp;",
-                    "<": "&lt;",
-                    ">": "&gt;",
-                    '"': "&quot;",
-                    "'": "&#39;"
-                })[character]
-            );
-        }
-
-        /* Edit project */
-
+        // Edit a project.
         function editProject(id) {
             const project = projects.find(item => item.id === id);
 
             if (!project) {
+                alert("Project not found.");
                 return;
             }
 
             editingProjectId = id;
 
             projectName.value = project.name;
-            projectCategory.value = project.category || "Other";
-            projectStatus.value = project.status || "Planned";
-            projectDate.value = project.date || "";
-            projectDescription.value = project.description || "";
+            projectCategory.value = project.category;
+            projectStatus.value = project.status;
+            projectDate.value = project.date;
+            projectDescription.value = project.description;
 
             formTitle.textContent = "Edit Project";
             submitButton.textContent = "💾 Save Changes";
-
             cancelEditButton.classList.remove("hidden");
 
-            projectForm.scrollIntoView({
+            document.getElementById("formPanel").scrollIntoView({
                 behavior: "smooth",
                 block: "start"
             });
@@ -1030,22 +768,16 @@
             projectName.focus();
         }
 
-        /* Delete project */
-
+        // Delete a project.
         function deleteProject(id) {
             const project = projects.find(item => item.id === id);
 
             if (!project) {
+                alert("Project not found.");
                 return;
             }
 
-            const confirmed = confirm(
-                'Are you sure you want to delete "' +
-                project.name +
-                '"?'
-            );
-
-            if (!confirmed) {
+            if (!confirm('Delete "' + project.name + '"?')) {
                 return;
             }
 
@@ -1059,8 +791,7 @@
             renderProjects();
         }
 
-        /* Format date */
-
+        // Format a date.
         function formatDate(value) {
             if (!value) {
                 return "No target date";
@@ -1075,8 +806,7 @@
             return parts[2] + "/" + parts[1] + "/" + parts[0];
         }
 
-        /* Update statistics */
-
+        // Update the statistics.
         function updateStatistics() {
             totalCount.textContent = projects.length;
 
@@ -1089,11 +819,9 @@
             ).length;
         }
 
-        /* Search and filter projects */
-
+        // Search and filter projects.
         function getFilteredProjects() {
             const term = searchInput.value.trim().toLowerCase();
-
             const selectedStatus = statusFilter.value;
             const selectedCategory = categoryFilter.value;
 
@@ -1115,21 +843,17 @@
                     selectedCategory === "All" ||
                     project.category === selectedCategory;
 
-                return matchesSearch &&
-                    matchesStatus &&
-                    matchesCategory;
+                return matchesSearch && matchesStatus && matchesCategory;
             });
         }
 
-        /* Display project cards */
-
+        // Display project cards.
         function renderProjects() {
             updateStatistics();
 
             const filteredProjects = getFilteredProjects();
 
             projectList.replaceChildren();
-
             emptyState.classList.add("hidden");
             noResults.classList.add("hidden");
 
@@ -1145,7 +869,6 @@
 
             filteredProjects.forEach(project => {
                 const card = document.createElement("article");
-
                 card.className = "project-card";
 
                 let statusClass = "status-not-started";
@@ -1159,12 +882,12 @@
                 card.innerHTML = `
                     <h3>📘 ${escapeHTML(project.name)}</h3>
 
-                    <p class="project-description">
-                        ${escapeHTML(
+                    <p class="project-description">${
+                        escapeHTML(
                             project.description ||
                             "A new project ready to begin."
-                        )}
-                    </p>
+                        )
+                    }</p>
 
                     <div class="badges">
                         <span class="badge ${statusClass}">
@@ -1182,19 +905,15 @@
                         </span>
 
                         <div class="project-actions">
-                            <button
-                                type="button"
+                            <button type="button"
                                 class="btn btn-edit"
-                                data-action="edit"
-                            >
+                                data-action="edit">
                                 ✏️ Edit
                             </button>
 
-                            <button
-                                type="button"
+                            <button type="button"
                                 class="btn btn-delete"
-                                data-action="delete"
-                            >
+                                data-action="delete">
                                 🗑️ Delete
                             </button>
                         </div>
@@ -1215,14 +934,12 @@
             });
         }
 
-        /* Search and filter events */
-
+        // Update the page immediately when searching or filtering.
         searchInput.addEventListener("input", renderProjects);
         statusFilter.addEventListener("change", renderProjects);
         categoryFilter.addEventListener("change", renderProjects);
 
-        /* Start the application */
-
+        // Start the application.
         loadProjects();
     </script>
 
